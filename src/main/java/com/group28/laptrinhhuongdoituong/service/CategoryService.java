@@ -1,20 +1,31 @@
 package com.group28.laptrinhhuongdoituong.service;
 
 import com.group28.laptrinhhuongdoituong.model.Category;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.stereotype.Repository;
+import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.persistence.EntityManager;
 import java.util.Optional;
-import java.util.function.Function;
 
-@Repository
-public interface CategoryService extends JpaRepository<Category, Long> {
+@Service
+public class CategoryService {
+    @Autowired
+    private CategoryRepository categoryRepository;
 
+    public Category create(Category category) {
+        return categoryRepository.save(category);
+    }
 
+    public void remove(Long id){
+        categoryRepository.deleteById(id);
+    }
+
+    public Iterable<Category> findAll(){
+        return categoryRepository.findAll();
+    }
+
+    public Optional<Category> findOneById(long id){
+        return categoryRepository.findById(id);
+    }
 }
