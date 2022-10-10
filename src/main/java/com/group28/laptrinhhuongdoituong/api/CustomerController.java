@@ -30,7 +30,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Customer>> findCategory(@PathVariable("id") long id) {
+    public ResponseEntity<Optional<Customer>> findCustomer(@PathVariable("id") long id) {
         Optional<Customer> customer = customerService.findOneById(id);
         if(customer.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
