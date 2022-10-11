@@ -1,6 +1,6 @@
-package com.group28.laptrinhhuongdoituong.service;
+package com.group28.laptrinhhuongdoituong.service.implement;
 
-import com.group28.laptrinhhuongdoituong.model.Customer;
+import com.group28.laptrinhhuongdoituong.entity.CustomerEntity;
 import com.group28.laptrinhhuongdoituong.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer create(Customer customer) {
+    public CustomerEntity create(CustomerEntity customer) {
         return customerRepository.save(customer);
     }
 
@@ -20,11 +20,11 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public Iterable<Customer> findAll(){
+    public Iterable<CustomerEntity> findAll(){
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> findOneById(long id){
+    public Optional<CustomerEntity> findOneById(long id){
         return customerRepository.findById(id);
     }
 }

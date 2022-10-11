@@ -1,11 +1,10 @@
-package com.group28.laptrinhhuongdoituong.service;
+package com.group28.laptrinhhuongdoituong.service.implement;
 
-import com.group28.laptrinhhuongdoituong.model.Category;
+import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Service
@@ -13,7 +12,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Category create(Category category) {
+    public CategoryEntity create(CategoryEntity category) {
         return categoryRepository.save(category);
     }
 
@@ -21,11 +20,11 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public Iterable<Category> findAll(){
+    public Iterable<CategoryEntity> findAll(){
         return categoryRepository.findAll();
     }
 
-    public Optional<Category> findOneById(long id){
+    public Optional<CategoryEntity> findOneById(long id){
         return categoryRepository.findById(id);
     }
 }

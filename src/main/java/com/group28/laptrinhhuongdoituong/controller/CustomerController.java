@@ -1,8 +1,7 @@
-package com.group28.laptrinhhuongdoituong.api;
+package com.group28.laptrinhhuongdoituong.controller;
 
-import com.group28.laptrinhhuongdoituong.model.Category;
-import com.group28.laptrinhhuongdoituong.model.Customer;
-import com.group28.laptrinhhuongdoituong.service.CustomerService;
+import com.group28.laptrinhhuongdoituong.entity.CustomerEntity;
+import com.group28.laptrinhhuongdoituong.service.implement.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,25 +20,25 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping(value = "/customer/", method = RequestMethod.GET)
-    public ResponseEntity<List<Customer>> listAllCustomer(){
-        List<Customer> listCustomer= (List<Customer>) customerService.findAll();
+    public ResponseEntity<List<CustomerEntity>> listAllCustomer(){
+        List<CustomerEntity> listCustomer= (List<CustomerEntity>) customerService.findAll();
         if(listCustomer.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Customer>>(listCustomer, HttpStatus.OK);
+        return new ResponseEntity<List<CustomerEntity>>(listCustomer, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Customer>> findCustomer(@PathVariable("id") long id) {
-        Optional<Customer> customer = customerService.findOneById(id);
+    public ResponseEntity<Optional<CustomerEntity>> findCustomer(@PathVariable("id") long id) {
+        Optional<CustomerEntity> customer = customerService.findOneById(id);
         if(customer.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<Optional<Customer>>(customer, HttpStatus.OK);
+        return new ResponseEntity<Optional<CustomerEntity>>(customer, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customer/", method = RequestMethod.POST)
-    public Customer saveCustomer(Customer customer) {
+    public CustomerEntity saveCustomer(CustomerEntity customer) {
 
         return customerService.create(customer);
     }

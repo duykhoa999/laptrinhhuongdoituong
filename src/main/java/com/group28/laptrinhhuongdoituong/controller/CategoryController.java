@@ -1,7 +1,7 @@
-package com.group28.laptrinhhuongdoituong.api;
+package com.group28.laptrinhhuongdoituong.controller;
 
-import com.group28.laptrinhhuongdoituong.model.Category;
-import com.group28.laptrinhhuongdoituong.service.CategoryService;
+import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
+import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,25 +21,25 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/category/", method = RequestMethod.GET)
-    public ResponseEntity<List<Category>> listAllCategory(){
-        List<Category> listCategory= (List<Category>) categoryService.findAll();
+    public ResponseEntity<List<CategoryEntity>> listAllCategory(){
+        List<CategoryEntity> listCategory= (List<CategoryEntity>) categoryService.findAll();
         if(listCategory.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Category>>(listCategory, HttpStatus.OK);
+        return new ResponseEntity<List<CategoryEntity>>(listCategory, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Category>> findCategory(@PathVariable("id") long id) {
-        Optional<Category> category = categoryService.findOneById(id);
+    public ResponseEntity<Optional<CategoryEntity>> findCategory(@PathVariable("id") long id) {
+        Optional<CategoryEntity> category = categoryService.findOneById(id);
         if(category.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<Optional<Category>>(category, HttpStatus.OK);
+        return new ResponseEntity<Optional<CategoryEntity>>(category, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/category/", method = RequestMethod.POST)
-    public Category saveCategory(Category category) {
+    public CategoryEntity saveCategory(CategoryEntity category) {
 
         return categoryService.create(category);
     }

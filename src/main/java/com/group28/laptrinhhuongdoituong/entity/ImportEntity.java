@@ -1,7 +1,6 @@
-package com.group28.laptrinhhuongdoituong.model;
+package com.group28.laptrinhhuongdoituong.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.*;
@@ -18,7 +17,7 @@ import java.io.Serializable;
 @Table(name = "import")
 @SQLDelete(sql = "UPDATE import SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Import implements Serializable {
+public class ImportEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     private String date;
     private long staff_id;

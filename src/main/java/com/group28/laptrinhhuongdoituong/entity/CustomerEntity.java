@@ -1,4 +1,4 @@
-package com.group28.laptrinhhuongdoituong.model;
+package com.group28.laptrinhhuongdoituong.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Table(name = "customer")
 @SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class Customer implements Serializable {
+public class CustomerEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name;
     private boolean gender;

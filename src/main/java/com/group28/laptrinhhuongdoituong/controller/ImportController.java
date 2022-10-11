@@ -1,9 +1,7 @@
-package com.group28.laptrinhhuongdoituong.api;
+package com.group28.laptrinhhuongdoituong.controller;
 
-import com.group28.laptrinhhuongdoituong.model.Customer;
-import com.group28.laptrinhhuongdoituong.model.Import;
-import com.group28.laptrinhhuongdoituong.service.CustomerService;
-import com.group28.laptrinhhuongdoituong.service.ImportService;
+import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
+import com.group28.laptrinhhuongdoituong.service.implement.ImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,25 +20,25 @@ public class ImportController {
     private ImportService importService;
 
     @RequestMapping(value = "/import/", method = RequestMethod.GET)
-    public ResponseEntity<List<Import>> listAllImport(){
-        List<Import> listImport= (List<Import>) importService.findAll();
+    public ResponseEntity<List<ImportEntity>> listAllImport(){
+        List<ImportEntity> listImport= (List<ImportEntity>) importService.findAll();
         if(listImport.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<Import>>(listImport, HttpStatus.OK);
+        return new ResponseEntity<List<ImportEntity>>(listImport, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/import/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<Import>> findImport(@PathVariable("id") long id) {
-        Optional<Import> imports = importService.findOneById(id);
+    public ResponseEntity<Optional<ImportEntity>> findImport(@PathVariable("id") long id) {
+        Optional<ImportEntity> imports = importService.findOneById(id);
         if(imports.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<Optional<Import>>(imports, HttpStatus.OK);
+        return new ResponseEntity<Optional<ImportEntity>>(imports, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/import/", method = RequestMethod.POST)
-    public Import saveImport(Import imports) {
+    public ImportEntity saveImport(ImportEntity imports) {
 
         return importService.create(imports);
     }

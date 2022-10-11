@@ -1,8 +1,7 @@
 package com.group28.laptrinhhuongdoituong.repository;
 
-import com.group28.laptrinhhuongdoituong.model.Customer;
-import com.group28.laptrinhhuongdoituong.model.Import;
+import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ImportRepository extends CrudRepository<Import, Long> {
+public interface ImportRepository extends CrudRepository<ImportEntity, Long> {
 }
