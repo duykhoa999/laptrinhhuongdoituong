@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @RequiredArgsConstructor
@@ -18,13 +19,14 @@ import java.io.Serializable;
 @SQLDelete(sql = "UPDATE import SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class ImportEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private String date;
-    private long staff_id;
-    private long vendor_order_id;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
+    private LocalDateTime date;
+    private Integer staff_id;
+    private Integer vendor_order_id;
 
-    private boolean deleted = Boolean.FALSE;
+    private Boolean deleted;
 }

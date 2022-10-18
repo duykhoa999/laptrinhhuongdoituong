@@ -1,8 +1,6 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -11,7 +9,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "category")
@@ -19,11 +18,11 @@ import java.io.Serializable;
 @Where(clause = "deleted=false")
 public class CategoryEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String name;
-    private String slug;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
-
-    private boolean deleted = Boolean.FALSE;
+    private Integer id;
+    private String name;
+    private String slug;
+    private Boolean deleted;
 }
