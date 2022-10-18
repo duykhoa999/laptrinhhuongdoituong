@@ -10,8 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CategoryDTO {
-    private Integer id;
+    private Long id;
     private String name;
     private String slug;
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }

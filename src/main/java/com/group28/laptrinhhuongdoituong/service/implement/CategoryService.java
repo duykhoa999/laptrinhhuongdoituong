@@ -1,30 +1,60 @@
 package com.group28.laptrinhhuongdoituong.service.implement;
 
+import com.group28.laptrinhhuongdoituong.converter.CategoryConverter;
+import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
+import com.group28.laptrinhhuongdoituong.service.ICategoryService;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryService {
+@RequiredArgsConstructor
+@Transactional
+public class CategoryService implements ICategoryService {
+
     @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    public CategoryEntity create(CategoryEntity category) {
-        return categoryRepository.save(category);
+    private final CategoryConverter categoryConverter;
+
+    @Override
+    public CategoryEntity save(CategoryDTO categoryDTO) {
+        return categoryRepository.save(categoryConverter.toEntity(categoryDTO));
     }
 
-    public void remove(Long id){
-        categoryRepository.deleteById(id);
+    @Override
+    public List<CategoryDTO> listCategory() {
+        List<CategoryEntity> list = categoryRepository.findAll();
+        List<CategoryDTO> listDTO = new ArrayList<>();
+        for (CategoryEntity item: list) {
+            if(!BooleanUtils.isTrue(item.getDeleted())){
+                CategoryDTO dto = categoryConverter.toDTO(item);
+                listDTO.add(dto);
+            }
+        }
+        return listDTO;
     }
 
-    public Iterable<CategoryEntity> findAll(){
-        return categoryRepository.findAll();
+    @Override
+    public void delete(CategoryDTO categoryDTO) {
+        categoryRepository.delete(categoryConverter.toEntity(categoryDTO));
     }
 
-    public Optional<CategoryEntity> findOneById(long id){
-        return categoryRepository.findById(id);
+    @Override
+    public CategoryDTO findCategoryById(Long id) {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        if(categoryRepository.findById(id).isEmpty()) {
+            return categoryDTO;
+        }
+        categoryDTO = categoryConverter.toDTO(categoryRepository.findById(id).get());
+        return categoryDTO;
     }
 }

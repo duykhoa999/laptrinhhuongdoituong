@@ -1,5 +1,8 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
+import com.group28.laptrinhhuongdoituong.dto.CustomerDTO;
+import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.entity.CustomerEntity;
 import com.group28.laptrinhhuongdoituong.service.implement.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,33 +23,34 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping(value = "/customer/", method = RequestMethod.GET)
-    public ResponseEntity<List<CustomerEntity>> listAllCustomer(){
-        List<CustomerEntity> listCustomer= (List<CustomerEntity>) customerService.findAll();
+    public ResponseEntity<?> listAllCategory(){
+        List<CustomerDTO> listCustomer = customerService.listCustomer();
         if(listCustomer.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<CustomerEntity>>(listCustomer, HttpStatus.OK);
+        return new ResponseEntity<>(listCustomer, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<CustomerEntity>> findCustomer(@PathVariable("id") long id) {
-        Optional<CustomerEntity> customer = customerService.findOneById(id);
-        if(customer.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<Optional<CustomerEntity>>(customer, HttpStatus.OK);
+    public ResponseEntity<?> findCustomer(@PathVariable("id") Long id) {
+        CustomerDTO customer = customerService.findCustomerById(id);
+//        if(category.isEmpty()) {
+//            return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        }
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/customer/", method = RequestMethod.POST)
-    public CustomerEntity saveCustomer(CustomerEntity customer) {
+    public CustomerEntity saveCustomer(CustomerDTO customer) {
 
-        return customerService.create(customer);
+        return customerService.save(customer);
     }
 
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteCustomer(@PathVariable("id") long id) {
+    public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id) {
         try {
-            customerService.remove(id);
+            CustomerDTO customer = customerService.findCustomerById(id);
+            customerService.delete(customer);
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

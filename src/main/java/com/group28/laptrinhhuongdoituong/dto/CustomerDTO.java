@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class CustomerDTO {
 
-    private Integer id;
+    private Long id;
     private String name;
     private Boolean gender;
     private String dob;
@@ -21,5 +21,5 @@ public class CustomerDTO {
     private String password;
     private Integer role_id;
 
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }
