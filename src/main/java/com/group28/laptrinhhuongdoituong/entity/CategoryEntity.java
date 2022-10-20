@@ -13,8 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "category")
-@SQLDelete(sql = "UPDATE category SET deleted = true WHERE id=?")
+@Table(name = "categories")
+@SQLDelete(sql = "UPDATE categories SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class CategoryEntity implements Serializable {
     private static final long serialVersionUID = 1L;
