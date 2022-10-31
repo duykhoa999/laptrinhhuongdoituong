@@ -13,22 +13,23 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @Getter
 @Setter
-@Table(name = "customer")
-@SQLDelete(sql = "UPDATE customer SET deleted = true WHERE id=?")
+@Table(name = "customers")
+@SQLDelete(sql = "UPDATE customers SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class CustomerEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    private boolean gender;
+    private Boolean gender;
     private String dob;
     private String address;
     private String phone;
     private String email;
     private String password;
-    private long role_id;
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Integer role_id;
 
-    private boolean deleted = Boolean.FALSE;
+    private Boolean deleted = Boolean.FALSE;
 }

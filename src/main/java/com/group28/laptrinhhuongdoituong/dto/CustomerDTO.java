@@ -9,9 +9,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CategoryDTO {
+public class CustomerDTO {
+
     private Long id;
     private String name;
-    private String slug;
+    private Boolean gender;
+    private String dob;
+    private String address;
+    private String phone;
+    private String email;
+    private String password;
+    private Integer role_id;
+
     private Boolean deleted = Boolean.FALSE;
 }

@@ -4,29 +4,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
 @Getter
 @Setter
-@Table(name = "imports")
-@SQLDelete(sql = "UPDATE imports SET deleted = true WHERE id=?")
+@Table(name = "import_detail")
+@SQLDelete(sql = "UPDATE import_detail SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class ImportEntity implements Serializable {
-
+public class ImportDetailEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Long import_id;
+    @Id
+    private Long product_id;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;

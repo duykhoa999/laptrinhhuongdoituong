@@ -1,7 +1,9 @@
 package com.group28.laptrinhhuongdoituong.service;
 
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
+import com.group28.laptrinhhuongdoituong.dto.ProductDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
+import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
 
 import java.util.List;
 
@@ -12,5 +14,5 @@ public interface ICategoryService {
 
     void delete(CategoryDTO categoryDTO);
 
-    CategoryDTO findCategoryById(int id);
+    CategoryDTO findCategoryById(Long id);
 }

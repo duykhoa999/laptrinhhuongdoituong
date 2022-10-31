@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
 import org.slf4j.Logger;
@@ -21,33 +22,34 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/category/", method = RequestMethod.GET)
-    public ResponseEntity<List<CategoryEntity>> listAllCategory(){
-        List<CategoryEntity> listCategory= (List<CategoryEntity>) categoryService.findAll();
+    public ResponseEntity<?> listAllCategory(){
+        List<CategoryDTO> listCategory= categoryService.listCategory();
         if(listCategory.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<CategoryEntity>>(listCategory, HttpStatus.OK);
+        return new ResponseEntity<>(listCategory, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Optional<CategoryEntity>> findCategory(@PathVariable("id") long id) {
-        Optional<CategoryEntity> category = categoryService.findOneById(id);
-        if(category.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<Optional<CategoryEntity>>(category, HttpStatus.OK);
+    public ResponseEntity<?> findCategory(@PathVariable("id") Long id) {
+        CategoryDTO category = categoryService.findCategoryById(id);
+//        if(category.isEmpty()) {
+//            return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        }
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
-
+//
     @RequestMapping(value = "/category/", method = RequestMethod.POST)
-    public CategoryEntity saveCategory(CategoryEntity category) {
+    public CategoryEntity saveCategory(CategoryDTO category) {
 
-        return categoryService.create(category);
+        return categoryService.save(category);
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteCategory(@PathVariable("id") long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
         try {
-            categoryService.remove(id);
+            CategoryDTO category = categoryService.findCategoryById(id);
+            categoryService.delete(category);
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

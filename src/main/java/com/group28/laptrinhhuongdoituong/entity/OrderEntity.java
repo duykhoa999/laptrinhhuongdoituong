@@ -4,25 +4,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
 @Getter
 @Setter
-@Table(name = "imports")
-@SQLDelete(sql = "UPDATE imports SET deleted = true WHERE id=?")
+@Table(name = "orders")
+@SQLDelete(sql = "UPDATE orders SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
-public class ImportEntity implements Serializable {
-
+public class OrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -30,8 +27,17 @@ public class ImportEntity implements Serializable {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
+    private String receiver_name;
+    private String receiver_address;
+    private String receiver_phone;
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date delivery_date;
+    private String note;
+    private Integer status;
+    private Integer payments;
     private Long staff_id;
-    private Long vendor_order_id;
+    private Long customer_id;
 
     private Boolean deleted = Boolean.FALSE;
 }

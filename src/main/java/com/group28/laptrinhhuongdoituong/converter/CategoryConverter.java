@@ -2,27 +2,30 @@ package com.group28.laptrinhhuongdoituong.converter;
 
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
+import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryConverter {
-    @Autowired
-    private final ModelMapper mapper;
+    public CategoryDTO toDTO(CategoryEntity categoryEntity) {
+        CategoryDTO categoryDTO = new CategoryDTO();
+        categoryDTO.setId(categoryEntity.getId());
+        categoryDTO.setName(categoryEntity.getName());
+        categoryDTO.setSlug(categoryEntity.getSlug());
+        categoryDTO.setDeleted(categoryEntity.getDeleted());
 
-
-    public CategoryConverter(ModelMapper mapper) {
-        this.mapper = mapper;
-    }
-
-    public CategoryEntity toEntity(CategoryDTO category){
-        CategoryEntity categoryEntity = mapper.map(category, CategoryEntity.class);
-        return categoryEntity;
-    }
-
-    public CategoryDTO toDTO(CategoryEntity category){
-        CategoryDTO categoryDTO = mapper.map(category, CategoryDTO.class);
         return categoryDTO;
+    }
+
+    public CategoryEntity toEntity(CategoryDTO categoryDTO) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(categoryDTO.getId());
+        categoryEntity.setName(categoryDTO.getName());
+        categoryEntity.setSlug(categoryDTO.getSlug());
+        categoryEntity.setDeleted(categoryDTO.getDeleted());
+
+        return categoryEntity;
     }
 }

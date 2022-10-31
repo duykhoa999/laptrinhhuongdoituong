@@ -8,19 +8,17 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "staff")
-@SQLDelete(sql = "UPDATE staff SET deleted = true WHERE id=?")
+@Table(name = "staffs")
+@SQLDelete(sql = "UPDATE staffs SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class StaffEntity implements Serializable {
     private static final long serialVersionUID = 1L;
