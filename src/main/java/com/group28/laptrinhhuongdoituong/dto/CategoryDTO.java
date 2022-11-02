@@ -5,13 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class CategoryDTO {
     private Long id;
+    @NotBlank(message = "Name cannot be blank")
     private String name;
+    @NotBlank(message = "Slug cannot be blank")
     private String slug;
     private Boolean deleted = Boolean.FALSE;
 }

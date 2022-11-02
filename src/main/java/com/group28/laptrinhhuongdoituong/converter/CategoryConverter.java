@@ -2,9 +2,6 @@ package com.group28.laptrinhhuongdoituong.converter;
 
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
-import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

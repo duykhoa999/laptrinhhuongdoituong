@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "product")
+@Table(name = "products")
 @SQLDelete(sql = "UPDATE product SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class ProductEntity implements Serializable {
@@ -31,5 +32,5 @@ public class ProductEntity implements Serializable {
     private Integer amount;
     private Integer category_id;
     private Integer vendor_id;
-    private Boolean deleted;
+    private Boolean deleted = null;
 }

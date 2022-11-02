@@ -1,17 +1,14 @@
 package com.group28.laptrinhhuongdoituong;
 
-import org.springframework.boot.CommandLineRunner;
+import com.group28.laptrinhhuongdoituong.commons.I18n;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 public class LaptrinhhuongdoituongApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		I18n.load();
 		SpringApplication.run(LaptrinhhuongdoituongApplication.class, args);
 	}
 

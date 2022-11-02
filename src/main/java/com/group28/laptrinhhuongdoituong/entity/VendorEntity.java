@@ -15,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "vendor")
+@Table(name = "vendors")
 @SQLDelete(sql = "UPDATE vendor SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class VendorEntity implements Serializable {
