@@ -30,7 +30,7 @@ public class ProductController {
     }
 
 
-    @PostMapping(value = "/addproduct")
+    @PostMapping
     public ResponseEntity<?> saveProduct(@Valid @RequestBody ProductDTO productDTO) {
         ProductEntity productEntity = productService.save(productDTO);
         return ResponseHandler.generateResponse("add product successfully", HttpStatus.OK, productEntity);
