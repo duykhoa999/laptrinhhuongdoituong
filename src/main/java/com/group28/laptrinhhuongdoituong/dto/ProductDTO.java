@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class ProductDTO {
-    private Integer id;
+    private Long id;
     @NotBlank(message = "Name cannot be empty")
     private String name;
     @NotBlank(message = "Slug cannot be empty")

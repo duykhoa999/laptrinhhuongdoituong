@@ -45,7 +45,7 @@ public class ProductService implements IProductService {
 
     @Override
     public void delete(ProductDTO productDTO) {
-
+        productRepository.delete(productConverter.toEntity(productDTO));
     }
 
     @Override

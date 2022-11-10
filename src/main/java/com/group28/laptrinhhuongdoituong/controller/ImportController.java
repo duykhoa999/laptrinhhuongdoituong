@@ -10,50 +10,48 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/import")
 public class ImportController {
     @Autowired
     private ImportService importService;
 
-    @RequestMapping(value = "/import/", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<?> listAllImport(){
         List<ImportDTO> listImport = importService.listImport();
         if(listImport.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return ResponseHandler.generateResponse("list import is empty", HttpStatus.OK, "");
         }
-        return new ResponseEntity<>(listImport, HttpStatus.OK);
+        return ResponseHandler.generateResponse("Get list import successfully", HttpStatus.OK, listImport);
     }
 
-    @RequestMapping(value = "/import/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> findImport(@PathVariable("id") Long id) {
         ImportDTO importDTO = importService.findImportById(id);
-//        if(category.isEmpty()) {
-//            return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        }
-        return new ResponseEntity<>(importDTO, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/import/", method = RequestMethod.POST)
-    public ImportEntity saveImport(ImportDTO importDTO) {
-
-        return importService.save(importDTO);
-    }
-
-    @RequestMapping(value = "/import/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteImport(@PathVariable("id") Long id) {
-        try {
-            ImportDTO importDTO = importService.findImportById(id);
-            importService.delete(importDTO);
-            return ResponseEntity.ok("Success");
-        }catch(Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        if(importDTO == null) {
+            return ResponseHandler.generateResponse("Get import successfully", HttpStatus.OK, "");
         }
+        return ResponseHandler.generateResponse("Get import successfully", HttpStatus.OK, importDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> saveImport(@Valid @RequestBody ImportDTO importDTO) {
+        ImportEntity entity = importService.save(importDTO);
+        return ResponseHandler.generateResponse("add import successfully", HttpStatus.OK, entity);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteImport(@PathVariable("id") Long id) {
+        ImportDTO importDTO = importService.findImportById(id);
+        importService.delete(importDTO);
+        return ResponseHandler.generateResponse("Delete import successfully", HttpStatus.OK, importDTO);
     }
 }
