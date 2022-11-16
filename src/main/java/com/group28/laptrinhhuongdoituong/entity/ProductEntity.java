@@ -17,13 +17,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "products")
-@SQLDelete(sql = "UPDATE product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE products SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class ProductEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
     private String slug;
     private Double price;

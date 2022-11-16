@@ -29,7 +29,7 @@ public class CustomerEntity implements Serializable {
     private String phone;
     private String email;
     private String password;
-    private Integer role_id;
+    private Long role_id;
 
     private Boolean deleted = Boolean.FALSE;
 }
