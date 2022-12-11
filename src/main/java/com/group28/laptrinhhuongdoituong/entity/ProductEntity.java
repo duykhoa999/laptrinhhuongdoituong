@@ -1,9 +1,12 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -30,7 +33,13 @@ public class ProductEntity implements Serializable {
     private String description;
     private String image;
     private Integer amount;
-    private Integer category_id;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private CategoryEntity category;
+    
     private Integer vendor_id;
     private Boolean deleted = null;
 }

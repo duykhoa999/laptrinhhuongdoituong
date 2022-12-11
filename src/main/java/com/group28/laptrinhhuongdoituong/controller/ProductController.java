@@ -23,7 +23,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Object> listAllProduct(){
-        List<ProductDTO> listProduct = productService.listProduct();
+        List<ProductEntity> listProduct = productService.listProduct();
         if(listProduct.isEmpty()) {
             return ResponseHandler.generateResponse("list product is empty", HttpStatus.OK, "");
         }

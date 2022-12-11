@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IProductService {
     ProductEntity save(ProductDTO productDTO);
-    List<ProductDTO> listProduct();
+    List<ProductEntity> listProduct();
     void delete(ProductDTO productDTO);
     ProductDTO findProductById(Long id);
     ProductEntity update(ProductDTO productDTO);

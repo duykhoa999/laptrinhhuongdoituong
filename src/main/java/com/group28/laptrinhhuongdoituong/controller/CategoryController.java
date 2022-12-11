@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.CategoryConverter;
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
@@ -43,7 +44,7 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findCategory(@PathVariable("id") Long id) {
-        CategoryDTO category = categoryService.findCategoryById(id);
+        CategoryEntity category = categoryService.findCategoryById(id);
         if(category == null) {
             return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, "");
         }
@@ -58,14 +59,14 @@ public class CategoryController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
-        CategoryDTO category = categoryService.findCategoryById(id);
-        categoryService.delete(category);
+        CategoryEntity category = categoryService.findCategoryById(id);
+        categoryService.delete(CategoryConverter.toDTO(category));
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, category);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable("id") Long id, @Valid @RequestBody CategoryDTO category) {
-        CategoryDTO categoryById = categoryService.findCategoryById(id);
+        CategoryEntity categoryById = categoryService.findCategoryById(id);
         if (categoryById == null) {
             return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find category by id: " + id);
         }

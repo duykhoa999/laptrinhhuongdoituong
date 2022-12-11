@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,16 +34,16 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public List<ProductDTO> listProduct() {
+    public List<ProductEntity> listProduct() {
         List<ProductEntity> list = productRepository.findAll();
-        List<ProductDTO> listDTO = new ArrayList<>();
-        for (ProductEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                ProductDTO dto = productConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<ProductDTO> listDTO = new ArrayList<>();
+        // for (ProductEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         ProductDTO dto = productConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override

@@ -23,11 +23,10 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private final CategoryRepository categoryRepository;
 
-    private final CategoryConverter categoryConverter;
 
     @Override
     public CategoryEntity save(CategoryDTO categoryDTO) {
-        return categoryRepository.save(categoryConverter.toEntity(categoryDTO));
+        return categoryRepository.save(CategoryConverter.toEntity(categoryDTO));
     }
 
     @Override
@@ -36,7 +35,7 @@ public class CategoryService implements ICategoryService {
         List<CategoryDTO> listDTO = new ArrayList<>();
         for (CategoryEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = categoryConverter.toDTO(item);
+                CategoryDTO dto = CategoryConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -49,7 +48,7 @@ public class CategoryService implements ICategoryService {
         List<CategoryDTO> listDTO = new ArrayList<>();
         for (CategoryEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = categoryConverter.toDTO(item);
+                CategoryDTO dto = CategoryConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -58,16 +57,14 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public void delete(CategoryDTO categoryDTO) {
-        categoryRepository.delete(categoryConverter.toEntity(categoryDTO));
+        categoryRepository.delete(CategoryConverter.toEntity(categoryDTO));
     }
 
     @Override
-    public CategoryDTO findCategoryById(Long id) {
-        CategoryDTO categoryDTO = new CategoryDTO();
+    public CategoryEntity findCategoryById(Long id) {
         if(categoryRepository.findById(id).isEmpty()) {
             return null;
         }
-        categoryDTO = categoryConverter.toDTO(categoryRepository.findById(id).get());
-        return categoryDTO;
+        return categoryRepository.findById(id).get();
     }
 }

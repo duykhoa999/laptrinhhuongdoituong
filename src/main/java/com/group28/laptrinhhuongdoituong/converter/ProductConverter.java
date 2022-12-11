@@ -2,10 +2,17 @@ package com.group28.laptrinhhuongdoituong.converter;
 
 import com.group28.laptrinhhuongdoituong.dto.ProductDTO;
 import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
+import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
+import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductConverter {
+
+    @Autowired
+    private CategoryService categoryService;
 
     public ProductDTO toDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
@@ -16,7 +23,7 @@ public class ProductConverter {
         productDTO.setDescription(productEntity.getDescription());
         productDTO.setImage(productEntity.getImage());
         productDTO.setAmount(productEntity.getAmount());
-        productDTO.setCategory_id(productEntity.getCategory_id());
+        productDTO.setCategory_id(productEntity.getCategory().getId());
         productDTO.setVendor_id(productEntity.getVendor_id());
         productDTO.setDeleted(productEntity.getDeleted());
         return productDTO;
@@ -31,7 +38,7 @@ public class ProductConverter {
         productEntity.setDescription(productDTO.getDescription());
         productEntity.setImage(productDTO.getImage());
         productEntity.setAmount(productDTO.getAmount());
-        productEntity.setCategory_id(productDTO.getCategory_id());
+        productEntity.setCategory(categoryService.findCategoryById(productDTO.getCategory_id()));
         productEntity.setVendor_id(productDTO.getVendor_id());
         productEntity.setDeleted(productDTO.getDeleted());
         return productEntity;

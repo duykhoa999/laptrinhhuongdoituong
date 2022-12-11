@@ -26,7 +26,7 @@ public class ProductDTO {
     @NotNull(message = "Amount cannot be empty")
     private Integer amount;
     @NotNull(message = "Category cannot be empty")
-    private Integer category_id;
+    private Long category_id;
     @NotNull(message = "Vendor cannot be empty")
     private Integer vendor_id;
     private Boolean deleted = false;
