@@ -44,6 +44,19 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    public List<CategoryDTO> listCategory(String keyWord) {
+        List<CategoryEntity> list = categoryRepository.search(keyWord);
+        List<CategoryDTO> listDTO = new ArrayList<>();
+        for (CategoryEntity item: list) {
+            if(!BooleanUtils.isTrue(item.getDeleted())){
+                CategoryDTO dto = categoryConverter.toDTO(item);
+                listDTO.add(dto);
+            }
+        }
+        return listDTO;
+    }
+
+    @Override
     public void delete(CategoryDTO categoryDTO) {
         categoryRepository.delete(categoryConverter.toEntity(categoryDTO));
     }

@@ -12,6 +12,8 @@ public interface ICategoryService {
 
     List<CategoryDTO> listCategory();
 
+    List<CategoryDTO> listCategory(String keyWord);
+
     void delete(CategoryDTO categoryDTO);
 
     CategoryDTO findCategoryById(Long id);

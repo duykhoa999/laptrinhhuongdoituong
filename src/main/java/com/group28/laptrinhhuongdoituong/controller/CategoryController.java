@@ -1,9 +1,12 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
+import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,8 +28,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<?> listAllCategory(){
-        List<CategoryDTO> listCategory = categoryService.listCategory();
+    public ResponseEntity<?> listAllCategory(@RequestBody Keyword keyword){
+        List<CategoryDTO> listCategory = new ArrayList<>();
+        if (StringUtils.isNotBlank(keyword.getKeyword())) {
+            listCategory = categoryService.listCategory(keyword.getKeyword());
+        } else {
+            listCategory = categoryService.listCategory();
+        }
         if(listCategory.isEmpty()) {
             return ResponseHandler.generateResponse("list category is empty", HttpStatus.OK, "");
         }
