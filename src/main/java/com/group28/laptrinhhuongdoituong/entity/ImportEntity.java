@@ -1,9 +1,13 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,4 +38,10 @@ public class ImportEntity implements Serializable {
     private Long vendor_order_id;
 
     private Boolean deleted = Boolean.FALSE;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private StaffEntity staff;
 }

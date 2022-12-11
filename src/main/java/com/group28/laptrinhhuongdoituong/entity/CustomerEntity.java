@@ -1,8 +1,11 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -32,4 +35,10 @@ public class CustomerEntity implements Serializable {
     private Long role_id;
 
     private Boolean deleted = Boolean.FALSE;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private RoleEntity role;
 }

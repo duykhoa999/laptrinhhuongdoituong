@@ -39,6 +39,12 @@ public class ProductEntity implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private CategoryEntity category;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private VendorEntity vendor;
     
     private Integer vendor_id;
     private Boolean deleted = null;

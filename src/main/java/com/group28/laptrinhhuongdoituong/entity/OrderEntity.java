@@ -1,9 +1,13 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,4 +44,16 @@ public class OrderEntity implements Serializable {
     private Long customer_id;
 
     private Boolean deleted = Boolean.FALSE;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private StaffEntity staff;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private CustomerEntity customer;
 }
