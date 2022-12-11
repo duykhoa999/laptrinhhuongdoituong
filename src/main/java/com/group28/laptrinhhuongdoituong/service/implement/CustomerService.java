@@ -55,7 +55,7 @@ public class CustomerService implements ICustomerService {
     public CustomerDTO findCustomerById(Long id) {
         CustomerDTO customerDTO = new CustomerDTO();
         if(customerRepository.findById(id).isEmpty()) {
-            return customerDTO;
+            return null;
         }
         customerDTO = customerConverter.toDTO(customerRepository.findById(id).get());
         return customerDTO;

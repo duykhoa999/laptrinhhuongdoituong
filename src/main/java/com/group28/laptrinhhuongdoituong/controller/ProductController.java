@@ -43,4 +43,15 @@ public class ProductController {
         productService.delete(product);
         return ResponseHandler.generateResponse("Delete product successfully", HttpStatus.OK, product);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
+        productDTO.setId(id);
+        ProductDTO productById = productService.findProductById(id);
+        if (productById == null) {
+            return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find product with id: " + id);
+        }
+        ProductEntity productEntity = productService.save(productDTO);
+        return ResponseHandler.generateResponse("update product successfully", HttpStatus.OK, productEntity);
+    }
 }

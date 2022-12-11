@@ -52,4 +52,15 @@ public class CategoryController {
         categoryService.delete(category);
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, category);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateCategory(@PathVariable("id") Long id, @Valid @RequestBody CategoryDTO category) {
+        CategoryDTO categoryById = categoryService.findCategoryById(id);
+        if (categoryById == null) {
+            return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find category by id: " + id);
+        }
+        category.setId(id);
+        CategoryEntity entity = categoryService.save(category);
+        return ResponseHandler.generateResponse("Update category successfully", HttpStatus.OK, entity);
+    }
 }

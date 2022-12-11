@@ -52,7 +52,7 @@ public class CategoryService implements ICategoryService {
     public CategoryDTO findCategoryById(Long id) {
         CategoryDTO categoryDTO = new CategoryDTO();
         if(categoryRepository.findById(id).isEmpty()) {
-            return categoryDTO;
+            return null;
         }
         categoryDTO = categoryConverter.toDTO(categoryRepository.findById(id).get());
         return categoryDTO;

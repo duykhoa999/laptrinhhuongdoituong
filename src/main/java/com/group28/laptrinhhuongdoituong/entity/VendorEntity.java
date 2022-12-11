@@ -22,7 +22,7 @@ public class VendorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
     private String address;
     private String email;

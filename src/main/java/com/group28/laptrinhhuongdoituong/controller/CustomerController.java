@@ -50,4 +50,15 @@ public class CustomerController {
         customerService.delete(customer);
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, customer);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @Valid @RequestBody CustomerDTO customer) {
+        CustomerDTO customerById = customerService.findCustomerById(id);
+        if (customerById == null) {
+            return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find customer by id: " + id);
+        }
+        customer.setId(id);
+        CustomerEntity entity = customerService.save(customer);
+        return ResponseHandler.generateResponse("Update customer successfully", HttpStatus.OK, entity);
+    }
 }
