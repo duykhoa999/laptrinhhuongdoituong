@@ -1,7 +1,7 @@
 package com.group28.laptrinhhuongdoituong.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
   private String first_name;
   private String last_name;
   private String gender;
-  private LocalDateTime dob;
+  private Date dob;
   private String address;
   private String phone;
   private String email;

@@ -9,10 +9,13 @@ import lombok.ToString;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -28,7 +31,9 @@ public class VendorOrderEntity implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String code;
-    private LocalDateTime date;
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date date;
     @ManyToOne
     @JoinColumn(name = "vendor_id")
     @EqualsAndHashCode.Exclude

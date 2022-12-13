@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
@@ -30,13 +30,13 @@ public class OrderEntity implements Serializable {
     private Long id;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime date;
+    private Date date;
     private String receiver_name;
     private String receiver_address;
     private String receiver_phone;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime delivery_date;
+    private Date delivery_date;
     private String note;
     private Integer status;
     private Integer payments;

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Setter
 public class OrderDTO {
     private Long id;
-    private LocalDateTime date;
+    private Date date;
     private String receiver_name;
     private String receiver_address;
     private String receiver_phone;
-    private LocalDateTime delivery_date;
+    private Date delivery_date;
     private String note;
     private Integer status;
     private Integer payments;

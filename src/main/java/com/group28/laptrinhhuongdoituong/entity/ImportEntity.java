@@ -15,7 +15,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
@@ -33,7 +33,7 @@ public class ImportEntity implements Serializable {
     private String code;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDateTime date;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "vendor_order_id")

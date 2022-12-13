@@ -10,10 +10,13 @@ import lombok.ToString;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -31,7 +34,9 @@ public class UserEntity implements Serializable {
     private String first_name;
     private String last_name;
     private String gender;
-    private LocalDateTime dob;
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dob;
     private String address;
     private String phone;
     private String email;

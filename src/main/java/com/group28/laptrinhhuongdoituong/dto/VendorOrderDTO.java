@@ -1,6 +1,6 @@
 package com.group28.laptrinhhuongdoituong.dto;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.Setter;
 public class VendorOrderDTO {
   private Long id;
   private String code;
-  private LocalDateTime date;
+  private Date date;
   private Long vendor_id;
   private Long user_id;
   private Boolean deleted = Boolean.FALSE;

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ImportDTO {
     private Long id;
     private String code;
-    private LocalDateTime date;
+    private Date date;
     private Long user_id;
     private Long vendor_order_id;
     private Boolean deleted = Boolean.FALSE;
