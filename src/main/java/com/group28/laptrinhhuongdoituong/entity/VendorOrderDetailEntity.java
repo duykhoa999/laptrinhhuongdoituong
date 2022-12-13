@@ -28,12 +28,12 @@ public class VendorOrderDetailEntity implements Serializable {
     private VendorOrderDetailKey id;
 
     @ManyToOne
-    @MapsId("vendor_order_id")
+    @MapsId("vendorOrderId")
     @JoinColumn(name = "vendor_order_id")
     private VendorOrderEntity vendor_order_id;
 
     @ManyToOne
-    @MapsId("product_id")
+    @MapsId("productId")
     @JoinColumn(name = "product_id")
     private ProductEntity product_id;
 

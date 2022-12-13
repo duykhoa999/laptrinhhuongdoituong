@@ -1,7 +1,9 @@
 package com.group28.laptrinhhuongdoituong.service.implement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.group28.laptrinhhuongdoituong.converter.ImportDetailConverter;
 import com.group28.laptrinhhuongdoituong.dto.ImportDetailDTO;
 import com.group28.laptrinhhuongdoituong.entity.ImportDetailEntity;
+import com.group28.laptrinhhuongdoituong.entity.ImportDetailKey;
 import com.group28.laptrinhhuongdoituong.repository.ImportDetailRepository;
 import com.group28.laptrinhhuongdoituong.service.IImportDetailService;
 
@@ -32,22 +35,27 @@ public class ImportDetailService implements IImportDetailService {
 
   @Override
   public List<ImportDetailEntity> listImportDetail() {
-    return null;
+    List<ImportDetailEntity> list = importDetailRepository.findAll();
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
   }
 
   @Override
   public List<ImportDetailEntity> listImportDetail(String keyWord) {
-    return null;
+    List<ImportDetailEntity> list = importDetailRepository.search(keyWord);
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
   }
 
   @Override
   public void delete(ImportDetailDTO importDetailDTO) {
-    
+    importDetailRepository.delete(importDetailConverter.toEntity(importDetailDTO));
   }
 
   @Override
-  public ImportDetailEntity findImportDetailById(Long id) {
-    return null;
+  public ImportDetailEntity findImportDetailById(ImportDetailKey id) {
+    if (importDetailRepository.findById(id).isEmpty()) {
+      return null;
+    }
+    return importDetailRepository.findById(id).get();
   }
-  
+
 }

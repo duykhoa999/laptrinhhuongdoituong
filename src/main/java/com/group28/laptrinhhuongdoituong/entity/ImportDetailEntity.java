@@ -22,12 +22,12 @@ public class ImportDetailEntity implements Serializable {
     private ImportDetailKey id;
 
     @ManyToOne
-    @MapsId("import_id")
+    @MapsId("importId")
     @JoinColumn(name = "import_id")
     private ImportEntity import_id;
 
     @ManyToOne
-    @MapsId("product_id")
+    @MapsId("productId")
     @JoinColumn(name = "product_id")
     private ProductEntity product_id;
 
