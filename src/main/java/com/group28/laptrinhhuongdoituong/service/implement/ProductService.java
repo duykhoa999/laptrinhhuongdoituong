@@ -32,13 +32,6 @@ public class ProductService implements IProductService {
     @Override
     public List<ProductEntity> listProduct() {
         List<ProductEntity> list = productRepository.findAll();
-        // List<ProductDTO> listDTO = new ArrayList<>();
-        // for (ProductEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         ProductDTO dto = productConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 

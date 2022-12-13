@@ -32,13 +32,6 @@ public class OrderService implements IOrderService {
     @Override
     public List<OrderEntity> listOrder() {
         List<OrderEntity> list = orderRepository.findAll();
-        // List<OrderDTO> listDTO = new ArrayList<>();
-        // for (OrderEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         OrderDTO dto = orderConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 

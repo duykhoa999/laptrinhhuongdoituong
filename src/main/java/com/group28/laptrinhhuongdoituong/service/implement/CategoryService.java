@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,26 +33,12 @@ public class CategoryService implements ICategoryService {
     @Override
     public List<CategoryEntity> listCategory() {
         List<CategoryEntity> list = categoryRepository.findAll();
-        // List<CategoryDTO> listDTO = new ArrayList<>();
-        // for (CategoryEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         CategoryDTO dto = categoryConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
     public List<CategoryEntity> listCategory(String keyWord) {
         List<CategoryEntity> list = categoryRepository.search(keyWord);
-        // List<CategoryDTO> listDTO = new ArrayList<>();
-        // for (CategoryEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         CategoryDTO dto = categoryConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 

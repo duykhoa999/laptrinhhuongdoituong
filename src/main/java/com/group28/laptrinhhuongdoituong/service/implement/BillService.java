@@ -32,13 +32,6 @@ public class BillService implements IBillService {
     @Override
     public List<BillEntity> listBill() {
         List<BillEntity> list = billRepository.findAll();
-        // List<BillDTO> listDTO = new ArrayList<>();
-        // for (BillEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         BillDTO dto = billConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 

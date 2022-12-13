@@ -31,13 +31,6 @@ public class ImportService implements IImportService {
     @Override
     public List<ImportEntity> listImport() {
         List<ImportEntity> list = importRepository.findAll();
-        // List<ImportDTO> listDTO = new ArrayList<>();
-        // for (ImportEntity item: list) {
-        //     if(!BooleanUtils.isTrue(item.getDeleted())){
-        //         ImportDTO dto = importConverter.toDTO(item);
-        //         listDTO.add(dto);
-        //     }
-        // }
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 

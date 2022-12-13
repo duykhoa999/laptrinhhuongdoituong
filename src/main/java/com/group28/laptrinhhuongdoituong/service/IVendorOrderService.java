@@ -6,10 +6,10 @@ import com.group28.laptrinhhuongdoituong.dto.VendorOrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.VendorOrderEntity;
 
 public interface IVendorOrderService {
-  VendorOrderEntity save(VendorOrderDTO staffDTO);
-  List<VendorOrderEntity> listStaff();
-  List<VendorOrderEntity> listStaff(String keyWord);
+  VendorOrderEntity save(VendorOrderDTO vendorOrderDTO);
+  List<VendorOrderEntity> listVendorOrder();
+  List<VendorOrderEntity> listVendorOrder(String keyWord);
   void delete(VendorOrderDTO productDTO);
   VendorOrderEntity findVendorOrderById(Long id);
-  VendorOrderEntity update(VendorOrderDTO productDTO);
+  VendorOrderEntity update(VendorOrderDTO vendorOrderDTO);
 }

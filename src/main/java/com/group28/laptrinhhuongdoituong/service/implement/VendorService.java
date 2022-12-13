@@ -34,13 +34,6 @@ public class VendorService implements IVendorService {
   @Override
   public List<VendorEntity> listVendor() {
     List<VendorEntity> list = vendorRepository.findAll();
-    // List<VendorDTO> listDTO = new ArrayList<>();
-    // for (VendorEntity item : list) {
-    //   if (!BooleanUtils.isTrue(item.getDeleted())) {
-    //     VendorDTO dto = vendorConverter.toDTO(item);
-    //     listDTO.add(dto);
-    //   }
-    // }
     return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
   }
 

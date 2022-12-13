@@ -59,6 +59,9 @@ public class ProductController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id) {
         ProductEntity product = productService.findProductById(id);
+        if (product == null) {
+            return ResponseHandler.generateResponse("Product not found", HttpStatus.OK, null);
+        }
         productService.delete(productConverter.toDTO(product));
         return ResponseHandler.generateResponse("Delete product successfully", HttpStatus.OK, product);
     }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class VendorOrderDTO {
-  private Integer id;
+  private Long id;
   private String code;
   private LocalDateTime date;
   private Long vendor_id;

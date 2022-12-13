@@ -6,10 +6,10 @@ import com.group28.laptrinhhuongdoituong.dto.UserDTO;
 import com.group28.laptrinhhuongdoituong.entity.UserEntity;
 
 public interface IUserService {
-  UserEntity save(UserDTO staffDTO);
-  List<UserEntity> listStaff();
-  List<UserEntity> listStaff(String keyWord);
-  void delete(UserDTO productDTO);
+  UserEntity save(UserDTO userDTO);
+  List<UserEntity> listUser();
+  List<UserEntity> listUser(String keyWord);
+  void delete(UserDTO userDTO);
   UserEntity findUserById(Long id);
-  UserEntity update(UserDTO productDTO);
+  UserEntity update(UserDTO userDTO);
 }
