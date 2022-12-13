@@ -23,7 +23,7 @@ public class VendorService implements IVendorService {
 
   @Autowired
   private final VendorRepository vendorRepository;
-
+  @Autowired
   private VendorConverter vendorConverter;
 
   @Override
@@ -64,8 +64,8 @@ public class VendorService implements IVendorService {
 
   @Override
   public List<VendorEntity> listVendor(String keyWord) {
-    // TODO Auto-generated method stub
-    return null;
+    List<VendorEntity> list = vendorRepository.search(keyWord);
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
   }
 
 }

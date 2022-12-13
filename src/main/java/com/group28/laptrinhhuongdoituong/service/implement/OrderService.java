@@ -57,7 +57,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public List<OrderEntity> listOrder(String keyWord) {
-        // TODO Auto-generated method stub
-        return null;
+        List<OrderEntity> list = orderRepository.search(keyWord);
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 }

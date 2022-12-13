@@ -1,10 +1,13 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.converter.OrderConverter;
+import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +35,13 @@ public class OrderController {
     private OrderConverter orderConverter;
 
     @GetMapping
-    public ResponseEntity<?> listAllOrder(){
-        List<OrderEntity> listOrder = orderService.listOrder();
+    public ResponseEntity<?> listAllOrder(@RequestBody Keyword keyword){
+        List<OrderEntity> listOrder = new ArrayList<>();
+        if (StringUtils.isNotBlank(keyword.getKeyword())) {
+            listOrder = orderService.listOrder(keyword.getKeyword());
+        } else {
+            listOrder = orderService.listOrder();
+        }
         if(listOrder.isEmpty()) {
             return ResponseHandler.generateResponse("list order is empty", HttpStatus.OK, new ArrayList<>());
         }

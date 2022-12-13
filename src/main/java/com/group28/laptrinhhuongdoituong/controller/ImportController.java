@@ -2,8 +2,11 @@ package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.converter.ImportConverter;
 import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
+import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
 import com.group28.laptrinhhuongdoituong.service.implement.ImportService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +27,13 @@ public class ImportController {
     private ImportConverter importConverter;
 
     @GetMapping
-    public ResponseEntity<?> listAllImport(){
-        List<ImportEntity> listImport = importService.listImport();
+    public ResponseEntity<?> listAllImport(@RequestBody Keyword keyword){
+        List<ImportEntity> listImport = new ArrayList<>();
+        if (StringUtils.isNotBlank(keyword.getKeyword())) {
+            listImport = importService.listImport(keyword.getKeyword());
+        } else {
+            listImport = importService.listImport();
+        }
         if(listImport.isEmpty()) {
             return ResponseHandler.generateResponse("list import is empty", HttpStatus.OK, new ArrayList<>());
         }

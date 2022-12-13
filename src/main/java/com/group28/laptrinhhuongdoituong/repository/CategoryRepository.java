@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 
-  @Query(value = "SELECT * FROM categories c WHERE CONCAT(c.id, ' ', c.name, ' ', c.slug) LIKE %?%", nativeQuery=true)
+  @Query(value = "SELECT * FROM categories c WHERE CONCAT(c.code, ' ', c.name, ' ', c.slug) LIKE %?%", nativeQuery=true)
   public List<CategoryEntity> search(String keyword);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group28.laptrinhhuongdoituong.converter.VendorConverter;
+import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.dto.VendorDTO;
 import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
@@ -34,12 +36,26 @@ public class VendorController {
   private VendorConverter vendorConverter;
 
   @GetMapping
-  public ResponseEntity<Object> listAllVendor() {
-    List<VendorEntity> listVendor = vendorService.listVendor();
+  public ResponseEntity<Object> listAllVendor(@RequestBody Keyword keyword) {
+    List<VendorEntity> listVendor = new ArrayList<>();
+    if (StringUtils.isNotBlank(keyword.getKeyword())) {
+      listVendor = vendorService.listVendor(keyword.getKeyword());
+    } else {
+      listVendor = vendorService.listVendor();
+    }
     if (listVendor.isEmpty()) {
       return ResponseHandler.generateResponse("list vendor is empty", HttpStatus.OK, new ArrayList<>());
     }
     return ResponseHandler.generateResponse("Get vendors successfully", HttpStatus.OK, listVendor);
+  }
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<?> findVendor(@PathVariable("id") Long id) {
+    VendorEntity entity = vendorService.findVendorById(id);
+    if (entity == null) {
+      return ResponseHandler.generateResponse("Vendor not found", HttpStatus.OK, null);
+    }
+    return ResponseHandler.generateResponse("Get Vendor successfully", HttpStatus.OK, entity);
   }
 
   @PostMapping

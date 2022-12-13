@@ -56,7 +56,7 @@ public class ImportService implements IImportService {
 
     @Override
     public List<ImportEntity> listImport(String keyWord) {
-        // TODO Auto-generated method stub
-        return null;
+        List<ImportEntity> list = importRepository.search(keyWord);
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 }

@@ -10,6 +10,6 @@ import com.group28.laptrinhhuongdoituong.entity.VendorOrderEntity;
 
 @Repository
 public interface VendorOrderRepository extends JpaRepository<VendorOrderEntity, Long> {
-  @Query(value = "SELECT * FROM categories c WHERE CONCAT(c.id, ' ', c.name, ' ', c.slug) LIKE %?%", nativeQuery=true)
+  @Query(value = "SELECT * FROM vendor_order vo, vendors v, users u WHERE vo.vendor_id = v.id and vo.user_id = u.id and CONCAT(vo.code, ' ', v.code, ' ', u.first_name,' ',u.last_name) LIKE %?%", nativeQuery=true)
   public List<VendorOrderEntity> search(String keyword);
 }

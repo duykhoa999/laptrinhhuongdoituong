@@ -62,7 +62,7 @@ public class ProductService implements IProductService {
 
     @Override
     public List<ProductEntity> listProduct(String keyWord) {
-        // TODO Auto-generated method stub
-        return null;
+        List<ProductEntity> list = productRepository.search(keyWord);
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 }

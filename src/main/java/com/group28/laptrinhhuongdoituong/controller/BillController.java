@@ -2,9 +2,12 @@ package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.converter.BillConverter;
 import com.group28.laptrinhhuongdoituong.dto.BillDTO;
+import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.entity.BillEntity;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.BillService;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +35,13 @@ public class BillController {
     private BillConverter billConverter;
 
     @GetMapping
-    public ResponseEntity<?> listAllBill() {
-        List<BillEntity> listBill = billService.listBill();
+    public ResponseEntity<?> listAllBill(@RequestBody Keyword keyword) {
+        List<BillEntity> listBill = new ArrayList<>();
+        if (StringUtils.isNotBlank(keyword.getKeyword())) {
+            listBill = billService.listBill(keyword.getKeyword());
+        } else {
+            listBill = billService.listBill();
+        }
         if (listBill.isEmpty()) {
             return ResponseHandler.generateResponse("list bill is empty", HttpStatus.OK, new ArrayList<>());
         }

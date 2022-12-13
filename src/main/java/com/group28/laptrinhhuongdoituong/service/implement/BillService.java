@@ -57,7 +57,7 @@ public class BillService implements IBillService {
 
     @Override
     public List<BillEntity> listBill(String keyWord) {
-        // TODO Auto-generated method stub
-        return null;
+        List<BillEntity> list = billRepository.search(keyWord);
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 }
