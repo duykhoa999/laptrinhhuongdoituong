@@ -21,6 +21,7 @@ public class ProductService implements IProductService {
 
     @Autowired
     private final ProductRepository productRepository;
+    @Autowired
     private ProductConverter productConverter;
 
     @Override

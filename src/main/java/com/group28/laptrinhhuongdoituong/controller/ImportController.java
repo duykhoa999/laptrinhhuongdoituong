@@ -20,11 +20,12 @@ public class ImportController {
     @Autowired
     private ImportService importService;
 
+    @Autowired
     private ImportConverter importConverter;
 
     @GetMapping
     public ResponseEntity<?> listAllImport(){
-        List<ImportDTO> listImport = importService.listImport();
+        List<ImportEntity> listImport = importService.listImport();
         if(listImport.isEmpty()) {
             return ResponseHandler.generateResponse("list import is empty", HttpStatus.OK, new ArrayList<>());
         }

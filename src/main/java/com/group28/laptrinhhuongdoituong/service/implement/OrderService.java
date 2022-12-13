@@ -21,6 +21,7 @@ public class OrderService implements IOrderService {
     @Autowired
     private final OrderRepository orderRepository;
 
+    @Autowired
     private OrderConverter orderConverter;
 
     @Override

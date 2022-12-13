@@ -1,8 +1,6 @@
 package com.group28.laptrinhhuongdoituong.converter;
 
-import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.dto.UserDTO;
-import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.entity.UserEntity;
 import com.group28.laptrinhhuongdoituong.service.implement.RoleService;
 

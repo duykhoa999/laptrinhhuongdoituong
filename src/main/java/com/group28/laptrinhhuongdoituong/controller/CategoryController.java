@@ -28,11 +28,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
     private CategoryConverter categoryConverter;
 
     @GetMapping
     public ResponseEntity<?> listAllCategory(@RequestBody Keyword keyword){
-        List<CategoryDTO> listCategory = new ArrayList<>();
+        List<CategoryEntity> listCategory = new ArrayList<>();
         if (StringUtils.isNotBlank(keyword.getKeyword())) {
             listCategory = categoryService.listCategory(keyword.getKeyword());
         } else {

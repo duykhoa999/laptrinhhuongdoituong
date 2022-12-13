@@ -1,12 +1,8 @@
 package com.group28.laptrinhhuongdoituong.service.implement;
 
-import com.group28.laptrinhhuongdoituong.converter.CategoryConverter;
 import com.group28.laptrinhhuongdoituong.converter.ImportConverter;
-import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
-import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
-import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
 import com.group28.laptrinhhuongdoituong.repository.ImportRepository;
 import com.group28.laptrinhhuongdoituong.service.IImportService;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +20,7 @@ import java.util.Optional;
 public class ImportService implements IImportService {
     @Autowired
     private final ImportRepository importRepository;
+    @Autowired
     private ImportConverter importConverter;
 
     @Override
@@ -33,16 +29,16 @@ public class ImportService implements IImportService {
     }
 
     @Override
-    public List<ImportDTO> listImport() {
+    public List<ImportEntity> listImport() {
         List<ImportEntity> list = importRepository.findAll();
-        List<ImportDTO> listDTO = new ArrayList<>();
-        for (ImportEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                ImportDTO dto = importConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<ImportDTO> listDTO = new ArrayList<>();
+        // for (ImportEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         ImportDTO dto = importConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
@@ -59,7 +55,7 @@ public class ImportService implements IImportService {
     }
 
     @Override
-    public List<ImportDTO> listImport(String keyWord) {
+    public List<ImportEntity> listImport(String keyWord) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +22,8 @@ public class CategoryService implements ICategoryService {
 
     @Autowired
     private final CategoryRepository categoryRepository;
+
+    @Autowired
     private CategoryConverter categoryConverter;
 
     @Override
@@ -30,29 +32,29 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public List<CategoryDTO> listCategory() {
+    public List<CategoryEntity> listCategory() {
         List<CategoryEntity> list = categoryRepository.findAll();
-        List<CategoryDTO> listDTO = new ArrayList<>();
-        for (CategoryEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = categoryConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<CategoryDTO> listDTO = new ArrayList<>();
+        // for (CategoryEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         CategoryDTO dto = categoryConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
-    public List<CategoryDTO> listCategory(String keyWord) {
+    public List<CategoryEntity> listCategory(String keyWord) {
         List<CategoryEntity> list = categoryRepository.search(keyWord);
-        List<CategoryDTO> listDTO = new ArrayList<>();
-        for (CategoryEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = categoryConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<CategoryDTO> listDTO = new ArrayList<>();
+        // for (CategoryEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         CategoryDTO dto = categoryConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override

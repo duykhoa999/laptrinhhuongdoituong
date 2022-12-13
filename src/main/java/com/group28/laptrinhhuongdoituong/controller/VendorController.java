@@ -30,6 +30,7 @@ public class VendorController {
   @Autowired
   private VendorService vendorService;
 
+  @Autowired
   private VendorConverter vendorConverter;
 
   @GetMapping
