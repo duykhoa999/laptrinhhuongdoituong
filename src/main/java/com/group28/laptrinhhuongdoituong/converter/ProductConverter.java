@@ -2,7 +2,6 @@ package com.group28.laptrinhhuongdoituong.converter;
 
 import com.group28.laptrinhhuongdoituong.dto.ProductDTO;
 import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
-import com.group28.laptrinhhuongdoituong.repository.CategoryRepository;
 import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
 import com.group28.laptrinhhuongdoituong.service.implement.VendorService;
 
@@ -13,15 +12,16 @@ import org.springframework.stereotype.Component;
 public class ProductConverter {
 
     @Autowired
-    private static CategoryService categoryService;
+    private CategoryService categoryService;
 
     @Autowired
-    private static VendorService vendorService;
+    private VendorService vendorService;
 
-    public static ProductDTO toDTO(ProductEntity productEntity) {
+    public ProductDTO toDTO(ProductEntity productEntity) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(productEntity.getId());
         productDTO.setName(productEntity.getName());
+        productDTO.setCode(productEntity.getCode());
         productDTO.setSlug(productEntity.getSlug());
         productDTO.setPrice(productEntity.getPrice());
         productDTO.setDescription(productEntity.getDescription());
@@ -33,10 +33,11 @@ public class ProductConverter {
         return productDTO;
     }
 
-    public static ProductEntity toEntity(ProductDTO productDTO) {
+    public ProductEntity toEntity(ProductDTO productDTO) {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setId(productDTO.getId());
         productEntity.setName(productDTO.getName());
+        productEntity.setCode(productDTO.getCode());
         productEntity.setSlug(productDTO.getSlug());
         productEntity.setPrice(productDTO.getPrice());
         productEntity.setDescription(productDTO.getDescription());

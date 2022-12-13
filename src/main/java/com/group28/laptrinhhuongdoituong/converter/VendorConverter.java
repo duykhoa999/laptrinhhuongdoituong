@@ -7,23 +7,25 @@ import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
 
 @Component
 public class VendorConverter {
-  public static VendorDTO toDTO(VendorEntity vendorEntity) {
+  public VendorDTO toDTO(VendorEntity vendorEntity) {
     VendorDTO vendorDTO = new VendorDTO();
     vendorDTO.setId(vendorEntity.getId());
-    vendorDTO.setName(vendorEntity.getName());
+    vendorDTO.setFirst_name(vendorEntity.getFirst_name());
+    vendorDTO.setLast_name(vendorEntity.getLast_name());
     vendorDTO.setAddress(vendorEntity.getAddress());
     vendorDTO.setEmail(vendorEntity.getEmail());
     vendorDTO.setDeleted(vendorEntity.getDeleted());
     return vendorDTO;
   }
 
-  public static VendorEntity toEntity(VendorDTO productDTO) {
+  public VendorEntity toEntity(VendorDTO vendorDTO) {
     VendorEntity vendorEntity = new VendorEntity();
-    vendorEntity.setId(productDTO.getId());
-    vendorEntity.setName(productDTO.getName());
-    vendorEntity.setAddress(productDTO.getAddress());
-    vendorEntity.setEmail(productDTO.getEmail());
-    vendorEntity.setDeleted(productDTO.getDeleted());
+    vendorEntity.setId(vendorDTO.getId());
+    vendorEntity.setFirst_name(vendorDTO.getFirst_name());
+    vendorEntity.setLast_name(vendorDTO.getLast_name());
+    vendorEntity.setAddress(vendorDTO.getAddress());
+    vendorEntity.setEmail(vendorDTO.getEmail());
+    vendorEntity.setDeleted(vendorDTO.getDeleted());
     return vendorEntity;
   }
 }

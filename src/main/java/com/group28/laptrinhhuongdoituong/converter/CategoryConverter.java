@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryConverter {
-    public static CategoryDTO toDTO(CategoryEntity categoryEntity) {
+    public CategoryDTO toDTO(CategoryEntity categoryEntity) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(categoryEntity.getId());
+        categoryDTO.setCode(categoryEntity.getCode());
         categoryDTO.setName(categoryEntity.getName());
         categoryDTO.setSlug(categoryEntity.getSlug());
         categoryDTO.setDeleted(categoryEntity.getDeleted());
@@ -16,9 +17,10 @@ public class CategoryConverter {
         return categoryDTO;
     }
 
-    public static CategoryEntity toEntity(CategoryDTO categoryDTO) {
+    public CategoryEntity toEntity(CategoryDTO categoryDTO) {
         CategoryEntity categoryEntity = new CategoryEntity();
         categoryEntity.setId(categoryDTO.getId());
+        categoryEntity.setCode(categoryDTO.getCode());
         categoryEntity.setName(categoryDTO.getName());
         categoryEntity.setSlug(categoryDTO.getSlug());
         categoryEntity.setDeleted(categoryDTO.getDeleted());

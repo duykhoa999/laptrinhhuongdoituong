@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,8 +13,9 @@ import java.util.Date;
 @Setter
 public class ImportDTO {
     private Long id;
-    private Date date;
-    private Long staff_id;
+    private String code;
+    private LocalDateTime date;
+    private Long user_id;
     private Long vendor_order_id;
     private Boolean deleted = Boolean.FALSE;
 }

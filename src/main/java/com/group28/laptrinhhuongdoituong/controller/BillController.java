@@ -2,11 +2,8 @@ package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.converter.BillConverter;
 import com.group28.laptrinhhuongdoituong.dto.BillDTO;
-import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.BillEntity;
-import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
 import com.group28.laptrinhhuongdoituong.service.implement.BillService;
-import com.group28.laptrinhhuongdoituong.service.implement.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +19,8 @@ import java.util.List;
 public class BillController {
     @Autowired
     private BillService billService;
+
+    private BillConverter billConverter;
 
     @RequestMapping(value = "/bill/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllBill(){
@@ -51,7 +50,7 @@ public class BillController {
     public ResponseEntity<?> deleteBill(@PathVariable("id") Long id) {
         try {
             BillEntity bill = billService.findBillById(id);
-            billService.delete(BillConverter.toDTO(bill));
+            billService.delete(billConverter.toDTO(bill));
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

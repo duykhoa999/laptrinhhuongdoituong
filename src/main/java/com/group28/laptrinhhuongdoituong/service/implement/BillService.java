@@ -22,9 +22,11 @@ public class BillService implements IBillService {
     @Autowired
     private final BillRepository billRepository;
 
+    private BillConverter billConverter;
+
     @Override
     public BillEntity save(BillDTO billDTO) {
-        return billRepository.save(BillConverter.toEntity(billDTO));
+        return billRepository.save(billConverter.toEntity(billDTO));
     }
 
     @Override
@@ -42,7 +44,7 @@ public class BillService implements IBillService {
 
     @Override
     public void delete(BillDTO billDTO) {
-        billRepository.delete(BillConverter.toEntity(billDTO));
+        billRepository.delete(billConverter.toEntity(billDTO));
     }
 
     @Override
@@ -51,5 +53,11 @@ public class BillService implements IBillService {
             return null;
         }
         return billRepository.findById(id).get();
+    }
+
+    @Override
+    public List<BillEntity> listBill(String keyWord) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

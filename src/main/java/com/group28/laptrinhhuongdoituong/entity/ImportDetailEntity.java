@@ -21,15 +21,21 @@ import java.util.Date;
 @Where(clause = "deleted=false")
 public class ImportDetailEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    private Long import_id;
-    @Id
-    private Long product_id;
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date;
-    private Long staff_id;
-    private Long vendor_order_id;
 
+    @EmbeddedId
+    private ImportDetailKey id;
+
+    @ManyToOne
+    @MapsId("import_id")
+    @JoinColumn(name = "import_id")
+    private ImportEntity import_id;
+
+    @ManyToOne
+    @MapsId("product_id")
+    @JoinColumn(name = "product_id")
+    private ProductEntity product_id;
+
+    private Integer amount;
+    private Double price;
     private Boolean deleted = Boolean.FALSE;
 }

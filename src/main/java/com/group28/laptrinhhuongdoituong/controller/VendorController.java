@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group28.laptrinhhuongdoituong.converter.VendorConverter;
 import com.group28.laptrinhhuongdoituong.dto.VendorDTO;
 import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
-import com.group28.laptrinhhuongdoituong.repository.VendorRepository;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.VendorService;
 
@@ -30,9 +29,11 @@ public class VendorController {
   @Autowired
   private VendorService vendorService;
 
+  private VendorConverter vendorConverter;
+
   @GetMapping
   public ResponseEntity<Object> listAllVendor() {
-    List<VendorDTO> listVendor = vendorService.listVendor();
+    List<VendorEntity> listVendor = vendorService.listVendor();
     if (listVendor.isEmpty()) {
       return ResponseHandler.generateResponse("list vendor is empty", HttpStatus.OK, "");
     }
@@ -48,7 +49,7 @@ public class VendorController {
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<?> deleteVendor(@PathVariable("id") Long id) {
     VendorEntity vendorDTO = vendorService.findVendorById(id);
-    vendorService.delete(VendorConverter.toDTO(vendorDTO));
+    vendorService.delete(vendorConverter.toDTO(vendorDTO));
     return ResponseHandler.generateResponse("Delete vendor successfully", HttpStatus.OK, vendorDTO);
   }
 

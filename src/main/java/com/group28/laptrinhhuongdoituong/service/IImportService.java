@@ -12,6 +12,8 @@ public interface IImportService {
 
     List<ImportDTO> listImport();
 
+    List<ImportDTO> listImport(String keyWord);
+
     void delete(ImportDTO importDTO);
 
     ImportEntity findImportById(Long id);

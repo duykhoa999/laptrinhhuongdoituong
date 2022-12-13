@@ -27,6 +27,7 @@ public class ProductEntity implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    private String code;
     private String name;
     private String slug;
     private Double price;

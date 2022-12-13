@@ -28,6 +28,8 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    private CategoryConverter categoryConverter;
+
     @GetMapping
     public ResponseEntity<?> listAllCategory(@RequestBody Keyword keyword){
         List<CategoryDTO> listCategory = new ArrayList<>();
@@ -37,7 +39,7 @@ public class CategoryController {
             listCategory = categoryService.listCategory();
         }
         if(listCategory.isEmpty()) {
-            return ResponseHandler.generateResponse("list category is empty", HttpStatus.OK, "");
+            return ResponseHandler.generateResponse("list category is empty", HttpStatus.OK, new ArrayList<>());
         }
         return ResponseHandler.generateResponse("Get list category successfully", HttpStatus.OK, listCategory);
     }
@@ -46,7 +48,7 @@ public class CategoryController {
     public ResponseEntity<?> findCategory(@PathVariable("id") Long id) {
         CategoryEntity category = categoryService.findCategoryById(id);
         if(category == null) {
-            return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, "");
+            return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, null);
         }
         return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, category);
     }
@@ -60,7 +62,7 @@ public class CategoryController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
         CategoryEntity category = categoryService.findCategoryById(id);
-        categoryService.delete(CategoryConverter.toDTO(category));
+        categoryService.delete(categoryConverter.toDTO(category));
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, category);
     }
 

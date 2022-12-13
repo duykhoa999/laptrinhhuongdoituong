@@ -1,6 +1,5 @@
 package com.group28.laptrinhhuongdoituong.dto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -12,14 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class StaffDTO implements Serializable {
-  private Long id;
-  private String gender;
-  private LocalDateTime dob;
-  private String address;
-  private String phone;
-  private String email;
-  private String password;
-  private Integer role_id;
+public class VendorOrderDTO {
+  private Integer id;
+  private String code;
+  private LocalDateTime date;
+  private Long vendor_id;
+  private Long user_id;
   private Boolean deleted = Boolean.FALSE;
 }

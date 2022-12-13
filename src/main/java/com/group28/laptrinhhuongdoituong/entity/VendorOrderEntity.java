@@ -1,9 +1,12 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -24,9 +27,18 @@ public class VendorOrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+    private String code;
     private LocalDateTime date;
-    private Integer vendor_id;
-    private Integer staff_id;
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private VendorEntity vendor;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private UserEntity user;
     private Boolean deleted = Boolean.FALSE;
 }

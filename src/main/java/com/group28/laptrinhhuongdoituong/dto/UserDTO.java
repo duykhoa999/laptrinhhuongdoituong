@@ -1,8 +1,7 @@
 package com.group28.laptrinhhuongdoituong.dto;
 
 import java.io.Serializable;
-
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,16 +12,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class VendorDTO implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class UserDTO implements Serializable {
   private Long id;
-  @NotBlank(message = "First Name cannot be empty")
   private String first_name;
-  @NotBlank(message = "Last Name cannot be empty")
   private String last_name;
-  @NotBlank(message = "Address cannot be empty")
+  private String gender;
+  private LocalDateTime dob;
   private String address;
-  @NotBlank(message = "Email cannot be empty")
+  private String phone;
   private String email;
+  private String password;
+  private Long role_id;
   private Boolean deleted = Boolean.FALSE;
 }

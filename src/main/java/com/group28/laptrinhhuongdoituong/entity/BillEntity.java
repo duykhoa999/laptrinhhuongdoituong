@@ -30,10 +30,11 @@ public class BillEntity implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    private String code;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-    private Float total;
+    private Double total;
     private Boolean deleted = Boolean.FALSE;
 
     @OneToOne
@@ -43,8 +44,8 @@ public class BillEntity implements Serializable {
     private OrderEntity order;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id")
+    @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private StaffEntity staff;
+    private UserEntity user;
 }

@@ -18,9 +18,10 @@ import java.util.Date;
 @Setter
 public class BillDTO {
     private Long id;
+    private String code;
     private Date date;
-    private Float total;
+    private Double total;
     private Long order_id;
-    private Long staff_id;
+    private Long user_id;
     private Boolean deleted = Boolean.FALSE;
 }

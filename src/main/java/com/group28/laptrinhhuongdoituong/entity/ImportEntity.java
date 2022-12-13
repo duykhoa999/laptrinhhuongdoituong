@@ -31,15 +31,21 @@ public class ImportEntity implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    private String code;
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date;
-    private Long vendor_order_id;
+    private LocalDateTime date;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_order_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private VendorOrderEntity vendorOrder;
     private Boolean deleted = Boolean.FALSE;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id")
+    @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private StaffEntity staff;
+    private UserEntity user;
 }

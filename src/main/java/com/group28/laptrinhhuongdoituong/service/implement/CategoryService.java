@@ -22,11 +22,11 @@ public class CategoryService implements ICategoryService {
 
     @Autowired
     private final CategoryRepository categoryRepository;
-
+    private CategoryConverter categoryConverter;
 
     @Override
     public CategoryEntity save(CategoryDTO categoryDTO) {
-        return categoryRepository.save(CategoryConverter.toEntity(categoryDTO));
+        return categoryRepository.save(categoryConverter.toEntity(categoryDTO));
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CategoryService implements ICategoryService {
         List<CategoryDTO> listDTO = new ArrayList<>();
         for (CategoryEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = CategoryConverter.toDTO(item);
+                CategoryDTO dto = categoryConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -48,7 +48,7 @@ public class CategoryService implements ICategoryService {
         List<CategoryDTO> listDTO = new ArrayList<>();
         for (CategoryEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                CategoryDTO dto = CategoryConverter.toDTO(item);
+                CategoryDTO dto = categoryConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -57,7 +57,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public void delete(CategoryDTO categoryDTO) {
-        categoryRepository.delete(CategoryConverter.toEntity(categoryDTO));
+        categoryRepository.delete(categoryConverter.toEntity(categoryDTO));
     }
 
     @Override

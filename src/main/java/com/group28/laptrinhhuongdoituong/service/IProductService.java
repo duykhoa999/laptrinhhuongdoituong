@@ -8,6 +8,7 @@ import java.util.List;
 public interface IProductService {
     ProductEntity save(ProductDTO productDTO);
     List<ProductEntity> listProduct();
+    List<ProductEntity> listProduct(String keyWord);
     void delete(ProductDTO productDTO);
     ProductEntity findProductById(Long id);
     ProductEntity update(ProductDTO productDTO);

@@ -1,11 +1,8 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
 import com.group28.laptrinhhuongdoituong.converter.OrderConverter;
-import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
-import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
-import com.group28.laptrinhhuongdoituong.service.implement.ImportService;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +19,8 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+
+    private OrderConverter orderConverter;
 
     @RequestMapping(value = "/order/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllOrder(){
@@ -51,7 +50,7 @@ public class OrderController {
     public ResponseEntity<?> deleteOrder(@PathVariable("id") Long id) {
         try {
             OrderEntity orderDTO = orderService.findOrderById(id);
-            orderService.delete(OrderConverter.toDTO(orderDTO));
+            orderService.delete(orderConverter.toDTO(orderDTO));
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

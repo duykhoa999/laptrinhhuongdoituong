@@ -1,14 +1,13 @@
 package com.group28.laptrinhhuongdoituong.service.implement;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group28.laptrinhhuongdoituong.controller.VendorController;
 import com.group28.laptrinhhuongdoituong.converter.VendorConverter;
 import com.group28.laptrinhhuongdoituong.dto.VendorDTO;
 import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
@@ -23,10 +22,9 @@ import lombok.RequiredArgsConstructor;
 public class VendorService implements IVendorService {
 
   @Autowired
-  private final VendorConverter vendorConverter;
-
-  @Autowired
   private final VendorRepository vendorRepository;
+
+  private VendorConverter vendorConverter;
 
   @Override
   public VendorEntity save(VendorDTO vendorDTO) {
@@ -34,16 +32,16 @@ public class VendorService implements IVendorService {
   }
 
   @Override
-  public List<VendorDTO> listVendor() {
+  public List<VendorEntity> listVendor() {
     List<VendorEntity> list = vendorRepository.findAll();
-    List<VendorDTO> listDTO = new ArrayList<>();
-    for (VendorEntity item : list) {
-      if (!BooleanUtils.isTrue(item.getDeleted())) {
-        VendorDTO dto = vendorConverter.toDTO(item);
-        listDTO.add(dto);
-      }
-    }
-    return listDTO;
+    // List<VendorDTO> listDTO = new ArrayList<>();
+    // for (VendorEntity item : list) {
+    //   if (!BooleanUtils.isTrue(item.getDeleted())) {
+    //     VendorDTO dto = vendorConverter.toDTO(item);
+    //     listDTO.add(dto);
+    //   }
+    // }
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
   }
 
   @Override
@@ -62,6 +60,12 @@ public class VendorService implements IVendorService {
   @Override
   public VendorEntity update(VendorDTO vendorDTO) {
     return vendorRepository.save(vendorConverter.toEntity(vendorDTO));
+  }
+
+  @Override
+  public List<VendorEntity> listVendor(String keyWord) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

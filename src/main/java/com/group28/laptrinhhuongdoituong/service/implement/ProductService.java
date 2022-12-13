@@ -7,14 +7,10 @@ import com.group28.laptrinhhuongdoituong.repository.ProductRepository;
 import com.group28.laptrinhhuongdoituong.service.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +21,7 @@ public class ProductService implements IProductService {
 
     @Autowired
     private final ProductRepository productRepository;
-
-    private final ProductConverter productConverter;
+    private ProductConverter productConverter;
 
     @Override
     public ProductEntity save(ProductDTO productDTO) {
@@ -62,5 +57,11 @@ public class ProductService implements IProductService {
     @Override
     public ProductEntity update(ProductDTO productDTO) {
         return productRepository.save(productConverter.toEntity(productDTO));
+    }
+
+    @Override
+    public List<ProductEntity> listProduct(String keyWord) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

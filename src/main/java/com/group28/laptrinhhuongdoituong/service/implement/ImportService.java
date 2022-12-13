@@ -25,11 +25,11 @@ import java.util.Optional;
 public class ImportService implements IImportService {
     @Autowired
     private final ImportRepository importRepository;
-
+    private ImportConverter importConverter;
 
     @Override
     public ImportEntity save(ImportDTO importDTO) {
-        return importRepository.save(ImportConverter.toEntity(importDTO));
+        return importRepository.save(importConverter.toEntity(importDTO));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ImportService implements IImportService {
         List<ImportDTO> listDTO = new ArrayList<>();
         for (ImportEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                ImportDTO dto = ImportConverter.toDTO(item);
+                ImportDTO dto = importConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -47,7 +47,7 @@ public class ImportService implements IImportService {
 
     @Override
     public void delete(ImportDTO importDTO) {
-        importRepository.delete(ImportConverter.toEntity(importDTO));
+        importRepository.delete(importConverter.toEntity(importDTO));
     }
 
     @Override
@@ -56,5 +56,11 @@ public class ImportService implements IImportService {
             return null;
         }
         return importRepository.findById(id).get();
+    }
+
+    @Override
+    public List<ImportDTO> listImport(String keyWord) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

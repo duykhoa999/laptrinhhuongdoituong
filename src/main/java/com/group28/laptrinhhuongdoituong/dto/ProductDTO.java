@@ -16,6 +16,8 @@ public class ProductDTO {
     private Long id;
     @NotBlank(message = "Name cannot be empty")
     private String name;
+    @NotBlank(message = "Code cannot be empty")
+    private String code;
     @NotBlank(message = "Slug cannot be empty")
     private String slug;
     @NotNull(message = "Price cannot be empty")

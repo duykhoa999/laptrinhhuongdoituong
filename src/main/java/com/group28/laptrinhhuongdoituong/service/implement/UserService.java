@@ -6,49 +6,49 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group28.laptrinhhuongdoituong.dto.RoleDTO;
-import com.group28.laptrinhhuongdoituong.entity.RoleEntity;
-import com.group28.laptrinhhuongdoituong.service.IRoleService;
+import com.group28.laptrinhhuongdoituong.dto.UserDTO;
+import com.group28.laptrinhhuongdoituong.entity.UserEntity;
+import com.group28.laptrinhhuongdoituong.service.IUserService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class RoleService implements IRoleService {
+public class UserService implements IUserService {
 
   @Override
-  public RoleEntity save(RoleDTO roleDTO) {
+  public UserEntity save(UserDTO staffDTO) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List<RoleEntity> listRole() {
+  public List<UserEntity> listStaff() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public void delete(RoleDTO productDTO) {
+  public void delete(UserDTO productDTO) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public RoleEntity findRoleById(Long id) {
+  public UserEntity findUserById(Long id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public RoleEntity update(RoleDTO productDTO) {
+  public UserEntity update(UserDTO productDTO) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List<RoleEntity> listRole(String keyWord) {
+  public List<UserEntity> listStaff(String keyWord) {
     // TODO Auto-generated method stub
     return null;
   }

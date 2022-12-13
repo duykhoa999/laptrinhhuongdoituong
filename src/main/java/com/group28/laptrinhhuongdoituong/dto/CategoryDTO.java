@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class CategoryDTO {
     private Long id;
+    @NotBlank(message = "Code cannot be blank")
+    private String code;
     @NotBlank(message = "Name cannot be blank")
     private String name;
     @NotBlank(message = "Slug cannot be blank")

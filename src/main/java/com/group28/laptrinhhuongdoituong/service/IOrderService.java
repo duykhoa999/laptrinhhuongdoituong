@@ -12,6 +12,8 @@ public interface IOrderService {
 
     List<OrderEntity> listOrder();
 
+    List<OrderEntity> listOrder(String keyWord);
+
     void delete(OrderDTO orderDTO);
 
     OrderEntity findOrderById(Long id);
