@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -35,7 +36,7 @@ public class VendorController {
   public ResponseEntity<Object> listAllVendor() {
     List<VendorEntity> listVendor = vendorService.listVendor();
     if (listVendor.isEmpty()) {
-      return ResponseHandler.generateResponse("list vendor is empty", HttpStatus.OK, "");
+      return ResponseHandler.generateResponse("list vendor is empty", HttpStatus.OK, new ArrayList<>());
     }
     return ResponseHandler.generateResponse("Get vendors successfully", HttpStatus.OK, listVendor);
   }
