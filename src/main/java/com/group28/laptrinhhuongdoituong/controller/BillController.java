@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.BillConverter;
 import com.group28.laptrinhhuongdoituong.dto.BillDTO;
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.entity.BillEntity;
@@ -24,7 +25,7 @@ public class BillController {
 
     @RequestMapping(value = "/bill/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllBill(){
-        List<BillDTO> listBill = billService.listBill();
+        List<BillEntity> listBill = billService.listBill();
         if(listBill.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -33,7 +34,7 @@ public class BillController {
 
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> findBill(@PathVariable("id") Long id) {
-        BillDTO bill = billService.findBillById(id);
+        BillEntity bill = billService.findBillById(id);
 //        if(category.isEmpty()) {
 //            return new ResponseEntity(HttpStatus.NO_CONTENT);
 //        }
@@ -49,8 +50,8 @@ public class BillController {
     @RequestMapping(value = "/bill/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteBill(@PathVariable("id") Long id) {
         try {
-            BillDTO bill = billService.findBillById(id);
-            billService.delete(bill);
+            BillEntity bill = billService.findBillById(id);
+            billService.delete(BillConverter.toDTO(bill));
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

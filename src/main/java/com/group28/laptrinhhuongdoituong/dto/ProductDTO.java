@@ -29,5 +29,5 @@ public class ProductDTO {
     private Long category_id;
     @NotNull(message = "Vendor cannot be empty")
     private Long vendor_id;
-    private Boolean deleted = false;
+    private Boolean deleted = Boolean.FALSE;
 }

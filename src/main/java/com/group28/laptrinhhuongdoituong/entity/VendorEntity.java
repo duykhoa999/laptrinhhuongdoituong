@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "vendors")
-@SQLDelete(sql = "UPDATE vendor SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE vendors SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class VendorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -26,5 +26,5 @@ public class VendorEntity implements Serializable {
     private String name;
     private String address;
     private String email;
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }

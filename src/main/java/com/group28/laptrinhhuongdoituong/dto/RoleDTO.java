@@ -12,5 +12,5 @@ import lombok.Setter;
 public class RoleDTO {
   private Long id;
   private String name;
-  private Boolean deleted;
+  private Boolean deleted = Boolean.FALSE;
 }

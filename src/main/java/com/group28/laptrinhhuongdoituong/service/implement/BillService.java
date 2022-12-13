@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,38 +22,34 @@ public class BillService implements IBillService {
     @Autowired
     private final BillRepository billRepository;
 
-    private final BillConverter billConverter;
-
     @Override
     public BillEntity save(BillDTO billDTO) {
-        return billRepository.save(billConverter.toEntity(billDTO));
+        return billRepository.save(BillConverter.toEntity(billDTO));
     }
 
     @Override
-    public List<BillDTO> listBill() {
+    public List<BillEntity> listBill() {
         List<BillEntity> list = billRepository.findAll();
-        List<BillDTO> listDTO = new ArrayList<>();
-        for (BillEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                BillDTO dto = billConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<BillDTO> listDTO = new ArrayList<>();
+        // for (BillEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         BillDTO dto = billConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
     public void delete(BillDTO billDTO) {
-        billRepository.delete(billConverter.toEntity(billDTO));
+        billRepository.delete(BillConverter.toEntity(billDTO));
     }
 
     @Override
-    public BillDTO findBillById(Long id) {
-        BillDTO billDTO = new BillDTO();
+    public BillEntity findBillById(Long id) {
         if(billRepository.findById(id).isEmpty()) {
-            return billDTO;
+            return null;
         }
-        billDTO = billConverter.toDTO(billRepository.findById(id).get());
-        return billDTO;
+        return billRepository.findById(id).get();
     }
 }

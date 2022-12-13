@@ -28,5 +28,5 @@ public class VendorOrderEntity implements Serializable {
     private LocalDateTime date;
     private Integer vendor_id;
     private Integer staff_id;
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }

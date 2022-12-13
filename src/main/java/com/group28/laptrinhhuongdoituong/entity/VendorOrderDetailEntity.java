@@ -27,5 +27,5 @@ public class VendorOrderDetailEntity implements Serializable {
     private Integer product_id;
     private Integer amount;
     private Double price;
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }

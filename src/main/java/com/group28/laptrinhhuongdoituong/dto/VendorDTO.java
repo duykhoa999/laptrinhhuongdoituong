@@ -22,5 +22,5 @@ public class VendorDTO implements Serializable {
   private String address;
   @NotBlank(message = "Email cannot be empty")
   private String email;
-  private Boolean deleted;
+  private Boolean deleted = Boolean.FALSE;
 }

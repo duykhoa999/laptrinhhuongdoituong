@@ -46,5 +46,5 @@ public class ProductEntity implements Serializable {
     @ToString.Exclude
     private VendorEntity vendor;
     
-    private Boolean deleted = null;
+    private Boolean deleted = Boolean.FALSE;
 }

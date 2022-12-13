@@ -32,5 +32,5 @@ public class StaffEntity implements Serializable {
     private String email;
     private String password;
     private Integer role_id;
-    private Boolean deleted;
+    private Boolean deleted = Boolean.FALSE;
 }
