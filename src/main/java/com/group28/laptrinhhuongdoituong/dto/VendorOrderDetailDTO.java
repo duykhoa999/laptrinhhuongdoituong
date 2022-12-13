@@ -10,8 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class VendorOrderDetailDTO {
-  private Integer vendor_order_id;
-  private Integer product_id;
+  private Long vendor_order_id;
+  private Long product_id;
   private Integer amount;
   private Double price;
   private Boolean deleted = Boolean.FALSE;
