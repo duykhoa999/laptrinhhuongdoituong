@@ -52,4 +52,15 @@ public class ImportController {
         importService.delete(importConverter.toDTO(importDTO));
         return ResponseHandler.generateResponse("Delete import successfully", HttpStatus.OK, importDTO);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateImport(@PathVariable("id") Long id, @Valid @RequestBody ImportDTO importDTO) {
+        ImportEntity entity = importService.findImportById(id);
+        if(entity == null) {
+            return ResponseHandler.generateResponse("Import not found", HttpStatus.OK, null);
+        }
+        importDTO.setId(id);
+        ImportEntity importEntity = importService.save(importConverter.toDTO(entity));
+        return ResponseHandler.generateResponse("Update import successfully", HttpStatus.OK, importEntity);
+    }
 }

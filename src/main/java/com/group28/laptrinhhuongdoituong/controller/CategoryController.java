@@ -48,7 +48,7 @@ public class CategoryController {
     public ResponseEntity<?> findCategory(@PathVariable("id") Long id) {
         CategoryEntity category = categoryService.findCategoryById(id);
         if(category == null) {
-            return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, null);
+            return ResponseHandler.generateResponse("category not found", HttpStatus.OK, null);
         }
         return ResponseHandler.generateResponse("Get category successfully", HttpStatus.OK, category);
     }
@@ -62,6 +62,9 @@ public class CategoryController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
         CategoryEntity category = categoryService.findCategoryById(id);
+        if(category == null) {
+            return ResponseHandler.generateResponse("category not found", HttpStatus.OK, null);
+        }
         categoryService.delete(categoryConverter.toDTO(category));
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, category);
     }
