@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.CustomerConverter;
 import com.group28.laptrinhhuongdoituong.dto.CategoryDTO;
 import com.group28.laptrinhhuongdoituong.dto.CustomerDTO;
 import com.group28.laptrinhhuongdoituong.entity.CategoryEntity;
@@ -23,7 +24,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<?> listAllCustomer(){
-        List<CustomerDTO> listCustomer = customerService.listCustomer();
+        List<CustomerEntity> listCustomer = customerService.listCustomer();
         if(listCustomer.isEmpty()) {
             return ResponseHandler.generateResponse("list customer is empty", HttpStatus.OK, "");
         }
@@ -32,7 +33,7 @@ public class CustomerController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findCustomer(@PathVariable("id") Long id) {
-        CustomerDTO customer = customerService.findCustomerById(id);
+        CustomerEntity customer = customerService.findCustomerById(id);
         if(customer == null) {
             return ResponseHandler.generateResponse("Get customer successfully", HttpStatus.OK, "");
         }
@@ -46,14 +47,14 @@ public class CustomerController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id) {
-        CustomerDTO customer = customerService.findCustomerById(id);
-        customerService.delete(customer);
+        CustomerEntity customer = customerService.findCustomerById(id);
+        customerService.delete(CustomerConverter.toDTO(customer));
         return ResponseHandler.generateResponse("Delete category successfully", HttpStatus.OK, customer);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @Valid @RequestBody CustomerDTO customer) {
-        CustomerDTO customerById = customerService.findCustomerById(id);
+        CustomerEntity customerById = customerService.findCustomerById(id);
         if (customerById == null) {
             return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find customer by id: " + id);
         }

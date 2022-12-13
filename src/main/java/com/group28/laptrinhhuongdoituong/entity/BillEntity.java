@@ -34,8 +34,6 @@ public class BillEntity implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
     private Float total;
-    private Long order_id;
-    private Long staff_id;
     private Boolean deleted = Boolean.FALSE;
 
     @OneToOne

@@ -7,7 +7,7 @@ import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
 
 @Component
 public class VendorConverter {
-  public VendorDTO toDTO(VendorEntity vendorEntity) {
+  public static VendorDTO toDTO(VendorEntity vendorEntity) {
     VendorDTO vendorDTO = new VendorDTO();
     vendorDTO.setId(vendorEntity.getId());
     vendorDTO.setName(vendorEntity.getName());
@@ -17,7 +17,7 @@ public class VendorConverter {
     return vendorDTO;
   }
 
-  public VendorEntity toEntity(VendorDTO productDTO) {
+  public static VendorEntity toEntity(VendorDTO productDTO) {
     VendorEntity vendorEntity = new VendorEntity();
     vendorEntity.setId(productDTO.getId());
     vendorEntity.setName(productDTO.getName());

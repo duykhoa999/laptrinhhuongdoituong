@@ -12,7 +12,7 @@ public interface IVendorService {
 
   void delete(VendorDTO vendorDTO);
 
-  VendorDTO findVendorById(Long id);
+  VendorEntity findVendorById(Long id);
 
   VendorEntity update(VendorDTO vendorDTO);
 }

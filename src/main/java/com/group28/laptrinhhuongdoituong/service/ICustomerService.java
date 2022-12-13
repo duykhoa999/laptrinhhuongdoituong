@@ -10,9 +10,9 @@ import java.util.List;
 public interface ICustomerService {
     CustomerEntity save(CustomerDTO customer);
 
-    List<CustomerDTO> listCustomer();
+    List<CustomerEntity> listCustomer();
 
     void delete(CustomerDTO customerDTO);
 
-    CustomerDTO findCustomerById(Long id);
+    CustomerEntity findCustomerById(Long id);
 }

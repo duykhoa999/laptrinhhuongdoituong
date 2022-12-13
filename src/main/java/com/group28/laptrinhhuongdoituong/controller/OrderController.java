@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.OrderConverter;
 import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
@@ -24,7 +25,7 @@ public class OrderController {
 
     @RequestMapping(value = "/order/", method = RequestMethod.GET)
     public ResponseEntity<?> listAllOrder(){
-        List<OrderDTO> listOrder = orderService.listOrder();
+        List<OrderEntity> listOrder = orderService.listOrder();
         if(listOrder.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -33,7 +34,7 @@ public class OrderController {
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> findOrder(@PathVariable("id") Long id) {
-        OrderDTO orderDTO = orderService.findOrderById(id);
+        OrderEntity orderDTO = orderService.findOrderById(id);
 //        if(category.isEmpty()) {
 //            return new ResponseEntity(HttpStatus.NO_CONTENT);
 //        }
@@ -49,8 +50,8 @@ public class OrderController {
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteOrder(@PathVariable("id") Long id) {
         try {
-            OrderDTO orderDTO = orderService.findOrderById(id);
-            orderService.delete(orderDTO);
+            OrderEntity orderDTO = orderService.findOrderById(id);
+            orderService.delete(OrderConverter.toDTO(orderDTO));
             return ResponseEntity.ok("Success");
         }catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

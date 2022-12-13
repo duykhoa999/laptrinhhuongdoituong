@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.ImportConverter;
 import com.group28.laptrinhhuongdoituong.dto.CustomerDTO;
 import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
 import com.group28.laptrinhhuongdoituong.entity.CustomerEntity;
@@ -35,7 +36,7 @@ public class ImportController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findImport(@PathVariable("id") Long id) {
-        ImportDTO importDTO = importService.findImportById(id);
+        ImportEntity importDTO = importService.findImportById(id);
         if(importDTO == null) {
             return ResponseHandler.generateResponse("Get import successfully", HttpStatus.OK, "");
         }
@@ -50,8 +51,8 @@ public class ImportController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteImport(@PathVariable("id") Long id) {
-        ImportDTO importDTO = importService.findImportById(id);
-        importService.delete(importDTO);
+        ImportEntity importDTO = importService.findImportById(id);
+        importService.delete(ImportConverter.toDTO(importDTO));
         return ResponseHandler.generateResponse("Delete import successfully", HttpStatus.OK, importDTO);
     }
 }

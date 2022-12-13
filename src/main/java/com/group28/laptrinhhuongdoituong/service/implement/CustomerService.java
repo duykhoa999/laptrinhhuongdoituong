@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,38 +27,34 @@ public class CustomerService implements ICustomerService {
     @Autowired
     private final CustomerRepository customerRepository;
 
-    private final CustomerConverter customerConverter;
-
     @Override
     public CustomerEntity save(CustomerDTO customerDTO) {
-        return customerRepository.save(customerConverter.toEntity(customerDTO));
+        return customerRepository.save(CustomerConverter.toEntity(customerDTO));
     }
 
     @Override
-    public List<CustomerDTO> listCustomer() {
+    public List<CustomerEntity> listCustomer() {
         List<CustomerEntity> list = customerRepository.findAll();
-        List<CustomerDTO> listDTO = new ArrayList<>();
-        for (CustomerEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                CustomerDTO dto = customerConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<CustomerDTO> listDTO = new ArrayList<>();
+        // for (CustomerEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         CustomerDTO dto = CustomerConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
     public void delete(CustomerDTO customerDTO) {
-        customerRepository.delete(customerConverter.toEntity(customerDTO));
+        customerRepository.delete(CustomerConverter.toEntity(customerDTO));
     }
 
     @Override
-    public CustomerDTO findCustomerById(Long id) {
-        CustomerDTO customerDTO = new CustomerDTO();
+    public CustomerEntity findCustomerById(Long id) {
         if(customerRepository.findById(id).isEmpty()) {
             return null;
         }
-        customerDTO = customerConverter.toDTO(customerRepository.findById(id).get());
-        return customerDTO;
+        return customerRepository.findById(id).get();
     }
 }

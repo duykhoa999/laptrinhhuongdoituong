@@ -52,13 +52,11 @@ public class VendorService implements IVendorService {
   }
 
   @Override
-  public VendorDTO findVendorById(Long id) {
-    VendorDTO vendorDTO = null;
+  public VendorEntity findVendorById(Long id) {
     if (vendorRepository.findById(id).isEmpty()) {
-      return vendorDTO;
+      return null;
     }
-    vendorDTO = vendorConverter.toDTO(vendorRepository.findById(id).get());
-    return vendorDTO;
+    return vendorRepository.findById(id).get();
   }
 
   @Override

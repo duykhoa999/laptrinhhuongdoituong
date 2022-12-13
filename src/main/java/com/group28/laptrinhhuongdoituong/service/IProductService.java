@@ -9,6 +9,6 @@ public interface IProductService {
     ProductEntity save(ProductDTO productDTO);
     List<ProductEntity> listProduct();
     void delete(ProductDTO productDTO);
-    ProductDTO findProductById(Long id);
+    ProductEntity findProductById(Long id);
     ProductEntity update(ProductDTO productDTO);
 }

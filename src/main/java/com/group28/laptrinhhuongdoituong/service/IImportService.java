@@ -14,5 +14,5 @@ public interface IImportService {
 
     void delete(ImportDTO importDTO);
 
-    ImportDTO findImportById(Long id);
+    ImportEntity findImportById(Long id);
 }

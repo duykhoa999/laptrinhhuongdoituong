@@ -52,13 +52,11 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ProductDTO findProductById(Long id) {
-        ProductDTO productDTO = null;
+    public ProductEntity findProductById(Long id) {
         if(productRepository.findById(id).isEmpty()) {
-            return productDTO;
+            return null;
         }
-        productDTO = productConverter.toDTO(productRepository.findById(id).get());
-        return productDTO;
+        return productRepository.findById(id).get();
     }
 
     @Override

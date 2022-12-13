@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,16 +34,16 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<OrderDTO> listOrder() {
+    public List<OrderEntity> listOrder() {
         List<OrderEntity> list = orderRepository.findAll();
-        List<OrderDTO> listDTO = new ArrayList<>();
-        for (OrderEntity item: list) {
-            if(!BooleanUtils.isTrue(item.getDeleted())){
-                OrderDTO dto = orderConverter.toDTO(item);
-                listDTO.add(dto);
-            }
-        }
-        return listDTO;
+        // List<OrderDTO> listDTO = new ArrayList<>();
+        // for (OrderEntity item: list) {
+        //     if(!BooleanUtils.isTrue(item.getDeleted())){
+        //         OrderDTO dto = orderConverter.toDTO(item);
+        //         listDTO.add(dto);
+        //     }
+        // }
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 
     @Override
@@ -51,12 +52,10 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public OrderDTO findOrderById(Long id) {
-        OrderDTO orderDTO = new OrderDTO();
+    public OrderEntity findOrderById(Long id) {
         if(orderRepository.findById(id).isEmpty()) {
-            return orderDTO;
+            return null;
         }
-        orderDTO = orderConverter.toDTO(orderRepository.findById(id).get());
-        return orderDTO;
+        return orderRepository.findById(id).get();
     }
 }

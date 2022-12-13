@@ -26,11 +26,10 @@ public class ImportService implements IImportService {
     @Autowired
     private final ImportRepository importRepository;
 
-    private final ImportConverter importConverter;
 
     @Override
     public ImportEntity save(ImportDTO importDTO) {
-        return importRepository.save(importConverter.toEntity(importDTO));
+        return importRepository.save(ImportConverter.toEntity(importDTO));
     }
 
     @Override
@@ -39,7 +38,7 @@ public class ImportService implements IImportService {
         List<ImportDTO> listDTO = new ArrayList<>();
         for (ImportEntity item: list) {
             if(!BooleanUtils.isTrue(item.getDeleted())){
-                ImportDTO dto = importConverter.toDTO(item);
+                ImportDTO dto = ImportConverter.toDTO(item);
                 listDTO.add(dto);
             }
         }
@@ -48,16 +47,14 @@ public class ImportService implements IImportService {
 
     @Override
     public void delete(ImportDTO importDTO) {
-        importRepository.delete(importConverter.toEntity(importDTO));
+        importRepository.delete(ImportConverter.toEntity(importDTO));
     }
 
     @Override
-    public ImportDTO findImportById(Long id) {
-        ImportDTO importDTO = new ImportDTO();
+    public ImportEntity findImportById(Long id) {
         if(importRepository.findById(id).isEmpty()) {
-            return importDTO;
+            return null;
         }
-        importDTO = importConverter.toDTO(importRepository.findById(id).get());
-        return importDTO;
+        return importRepository.findById(id).get();
     }
 }

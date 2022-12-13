@@ -1,5 +1,6 @@
 package com.group28.laptrinhhuongdoituong.controller;
 
+import com.group28.laptrinhhuongdoituong.converter.ProductConverter;
 import com.group28.laptrinhhuongdoituong.dto.CustomerDTO;
 import com.group28.laptrinhhuongdoituong.dto.ProductDTO;
 import com.group28.laptrinhhuongdoituong.entity.ProductEntity;
@@ -39,15 +40,15 @@ public class ProductController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id) {
-        ProductDTO product = productService.findProductById(id);
-        productService.delete(product);
+        ProductEntity product = productService.findProductById(id);
+        productService.delete(ProductConverter.toDTO(product));
         return ResponseHandler.generateResponse("Delete product successfully", HttpStatus.OK, product);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductDTO productDTO) {
         productDTO.setId(id);
-        ProductDTO productById = productService.findProductById(id);
+        ProductEntity productById = productService.findProductById(id);
         if (productById == null) {
             return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find product with id: " + id);
         }

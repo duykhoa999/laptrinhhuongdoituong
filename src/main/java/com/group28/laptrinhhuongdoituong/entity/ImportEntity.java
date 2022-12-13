@@ -34,9 +34,7 @@ public class ImportEntity implements Serializable {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-    private Long staff_id;
     private Long vendor_order_id;
-
     private Boolean deleted = Boolean.FALSE;
 
     @ManyToOne

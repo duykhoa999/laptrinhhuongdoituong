@@ -4,11 +4,22 @@ import com.group28.laptrinhhuongdoituong.dto.ImportDTO;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.ImportEntity;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
+import com.group28.laptrinhhuongdoituong.service.implement.CustomerService;
+import com.group28.laptrinhhuongdoituong.service.implement.StaffService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderConverter {
-    public OrderDTO toDTO(OrderEntity orderEntity) {
+
+    @Autowired
+    private static StaffService staffService;
+
+    @Autowired
+    private static CustomerService customerService;
+    
+    public static OrderDTO toDTO(OrderEntity orderEntity) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(orderEntity.getId());
         orderDTO.setDate(orderEntity.getDate());
@@ -19,14 +30,14 @@ public class OrderConverter {
         orderDTO.setNote(orderEntity.getNote());
         orderDTO.setStatus(orderEntity.getStatus());
         orderDTO.setPayments(orderEntity.getPayments());
-        orderDTO.setStaff_id(orderEntity.getStaff_id());
-        orderDTO.setCustomer_id(orderEntity.getCustomer_id());
+        orderDTO.setStaff_id(orderEntity.getStaff().getId());
+        orderDTO.setCustomer_id(orderEntity.getCustomer().getId());
         orderDTO.setDeleted(orderEntity.getDeleted());
 
         return orderDTO;
     }
 
-    public OrderEntity toEntity(OrderDTO orderDTO) {
+    public static OrderEntity toEntity(OrderDTO orderDTO) {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setId(orderDTO.getId());
         orderEntity.setDate(orderDTO.getDate());
@@ -37,8 +48,8 @@ public class OrderConverter {
         orderEntity.setNote(orderDTO.getNote());
         orderEntity.setStatus(orderDTO.getStatus());
         orderEntity.setPayments(orderDTO.getPayments());
-        orderEntity.setStaff_id(orderDTO.getStaff_id());
-        orderEntity.setCustomer_id(orderDTO.getCustomer_id());
+        orderEntity.setStaff(staffService.findStaffById(orderDTO.getStaff_id()));
+        orderEntity.setCustomer(customerService.findCustomerById(orderDTO.getCustomer_id()));
         orderEntity.setDeleted(orderDTO.getDeleted());
 
         return orderEntity;

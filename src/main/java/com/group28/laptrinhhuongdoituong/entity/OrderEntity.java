@@ -40,8 +40,6 @@ public class OrderEntity implements Serializable {
     private String note;
     private Integer status;
     private Integer payments;
-    private Long staff_id;
-    private Long customer_id;
 
     private Boolean deleted = Boolean.FALSE;
 

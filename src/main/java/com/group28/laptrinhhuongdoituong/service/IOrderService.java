@@ -10,9 +10,9 @@ import java.util.List;
 public interface IOrderService {
     OrderEntity save(OrderDTO order);
 
-    List<OrderDTO> listOrder();
+    List<OrderEntity> listOrder();
 
     void delete(OrderDTO orderDTO);
 
-    OrderDTO findOrderById(Long id);
+    OrderEntity findOrderById(Long id);
 }
