@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group28.laptrinhhuongdoituong.converter.UserConverter;
 import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.dto.UserDTO;
-import com.group28.laptrinhhuongdoituong.dto.VendorDTO;
 import com.group28.laptrinhhuongdoituong.entity.UserEntity;
-import com.group28.laptrinhhuongdoituong.entity.VendorEntity;
-import com.group28.laptrinhhuongdoituong.repository.UserRepository;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.UserService;
 

@@ -67,6 +67,9 @@ public class VendorController {
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<?> deleteVendor(@PathVariable("id") Long id) {
     VendorEntity vendorDTO = vendorService.findVendorById(id);
+    if (vendorDTO == null) {
+      return ResponseHandler.generateResponseErr(HttpStatus.OK, "cannot find vedor with id: " + id);
+    }
     vendorService.delete(vendorConverter.toDTO(vendorDTO));
     return ResponseHandler.generateResponse("Delete vendor successfully", HttpStatus.OK, vendorDTO);
   }
