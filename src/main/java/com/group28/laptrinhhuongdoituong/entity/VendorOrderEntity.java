@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -44,5 +46,8 @@ public class VendorOrderEntity implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private UserEntity user;
+
+    @OneToMany(mappedBy = "vendor_order_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<VendorOrderDetailEntity> vendorOrderDetail = new HashSet<>();
     private Boolean deleted = Boolean.FALSE;
 }
