@@ -34,6 +34,7 @@ public class ImportDetailConverter {
     ImportDetailKey key = new ImportDetailKey();
     key.setImportId(importDetailDTO.getImport_id());
     key.setProductId(importDetailDTO.getProduct_id());
+    importDetailEntity.setId(key);
     importDetailEntity.setImport_id(importService.findImportById(importDetailDTO.getImport_id()));
     importDetailEntity.setProduct_id(productService.findProductById(importDetailDTO.getProduct_id()));
     importDetailEntity.setAmount(importDetailDTO.getAmount());

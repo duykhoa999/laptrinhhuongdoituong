@@ -27,7 +27,7 @@ import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderDetailService;
 
 @RestController
-@RequestMapping("/api/Order_detail")
+@RequestMapping("/api/order_detail")
 public class OrderDetailController {
   
   @Autowired
