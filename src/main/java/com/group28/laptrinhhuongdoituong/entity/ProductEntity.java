@@ -47,9 +47,5 @@ public class ProductEntity implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private VendorEntity vendor;
-
-    @OneToMany(mappedBy = "product_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<VendorOrderDetailEntity> vendorOrderDetail = new HashSet<>();
-    
     private Boolean deleted = Boolean.FALSE;
 }

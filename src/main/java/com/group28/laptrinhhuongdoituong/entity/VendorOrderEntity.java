@@ -46,8 +46,5 @@ public class VendorOrderEntity implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private UserEntity user;
-
-    @OneToMany(mappedBy = "vendor_order_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<VendorOrderDetailEntity> vendorOrderDetail = new HashSet<>();
     private Boolean deleted = Boolean.FALSE;
 }
