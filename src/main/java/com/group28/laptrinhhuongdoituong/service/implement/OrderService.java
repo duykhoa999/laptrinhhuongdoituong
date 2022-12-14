@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +59,11 @@ public class OrderService implements IOrderService {
     public List<OrderEntity> listOrderByStatus(Integer Id) {
         List<OrderEntity> list = orderRepository.findAll();
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getStatus().equals(Id)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderEntity> listOrderBetweenDate(Date fromDate, Date toDate) {
+        List<OrderEntity> list = orderRepository.getOrderBetweenDate(fromDate, toDate);
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
 }

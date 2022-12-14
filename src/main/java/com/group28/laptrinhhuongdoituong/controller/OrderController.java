@@ -4,6 +4,7 @@ import com.group28.laptrinhhuongdoituong.converter.OrderConverter;
 import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
+import com.group28.laptrinhhuongdoituong.message.OrderDateRequest;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderService;
 
@@ -69,7 +70,16 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> saveImport(@Valid @RequestBody OrderDTO orderDTO) {
         OrderEntity entity = orderService.save(orderDTO);
-        return ResponseHandler.generateResponse("add category successfully", HttpStatus.OK, entity);
+        return ResponseHandler.generateResponse("add order successfully", HttpStatus.OK, entity);
+    }
+
+    @PostMapping(value = "/filterdate")
+    public ResponseEntity<?> getOrderBetweenDate(@Valid @RequestBody OrderDateRequest orderDateRequest) {
+        List<OrderEntity> listOrder = orderService.listOrderBetweenDate(orderDateRequest.getFromDate(), orderDateRequest.getToDate());
+        if (listOrder.isEmpty()) {
+            return ResponseHandler.generateResponse("list order is empty", HttpStatus.OK, new ArrayList<>());
+        }
+        return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, listOrder);
     }
 
     @DeleteMapping(value = "/{id}")
