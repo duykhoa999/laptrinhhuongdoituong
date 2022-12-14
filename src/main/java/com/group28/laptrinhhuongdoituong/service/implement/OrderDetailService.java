@@ -57,5 +57,11 @@ public class OrderDetailService implements IOrderDetailService {
     }
     return orderDetailRepository.findById(id).get();
   }
+
+  @Override
+  public List<OrderDetailEntity> listImportDetail(Long orderId) {
+    List<OrderDetailEntity> list = orderDetailRepository.findAll();
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getId().getOrderId().equals(orderId)).collect(Collectors.toList());
+  }
   
 }

@@ -50,6 +50,15 @@ public class VendorOrderDetailController {
     return ResponseHandler.generateResponse("Get list Vendor_order_detail successfully", HttpStatus.OK, vendorOrderDetailEntities);
   }
 
+  @GetMapping(value = "/{vendor_order_id}")
+  public ResponseEntity<?> findImportDetailByImportId(@PathVariable("vendor_order_id") Long vendor_order_id) {
+    List<VendorOrderDetailEntity> list = vendorOrderDetailService.listVendorOrderDetail(vendor_order_id);
+    if (list.isEmpty()) {
+      return ResponseHandler.generateResponse("Get Vendor_order_detail successfully", HttpStatus.OK, null);
+    }
+    return ResponseHandler.generateResponse("Get Vendor_order_detail successfully", HttpStatus.OK, list);
+  }
+
   @GetMapping(value = "/{vendor_order_id}/{product_id}")
   public ResponseEntity<?> findVendorOrderDetail(@PathVariable("vendor_order_id") Long vendor_order_id, @PathVariable("product_id") Long product_id) {
     VendorOrderDetailKey vendorOrderDetailKey = new VendorOrderDetailKey();

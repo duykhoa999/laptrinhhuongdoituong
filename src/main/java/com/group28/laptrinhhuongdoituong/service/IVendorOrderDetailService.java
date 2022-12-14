@@ -9,6 +9,7 @@ import com.group28.laptrinhhuongdoituong.entity.VendorOrderDetailKey;
 public interface IVendorOrderDetailService {
   VendorOrderDetailEntity save(VendorOrderDetailDTO vendorOrderDetailDTO);
   List<VendorOrderDetailEntity> listVendorOrderDetail();
+  List<VendorOrderDetailEntity> listVendorOrderDetail(Long vendorOrderId);
   List<VendorOrderDetailEntity> listVendorOrderDetail(String keyWord);
   void delete(VendorOrderDetailDTO vendorOrderDetailDTO);
   VendorOrderDetailEntity findVendorOrderDetailById(VendorOrderDetailKey id);

@@ -58,4 +58,10 @@ public class ImportDetailService implements IImportDetailService {
     return importDetailRepository.findById(id).get();
   }
 
+  @Override
+  public List<ImportDetailEntity> listImportDetail(Long importId) {
+    List<ImportDetailEntity> list = importDetailRepository.findAll();
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getId().getImportId().equals(importId)).collect(Collectors.toList());
+  }
+
 }

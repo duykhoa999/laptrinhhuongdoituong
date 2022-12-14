@@ -50,6 +50,15 @@ public class ImportDetailController {
     return ResponseHandler.generateResponse("Get list import_detail successfully", HttpStatus.OK, listImportDetail);
   }
 
+  @GetMapping(value = "/{import_id}")
+  public ResponseEntity<?> findImportDetailByImportId(@PathVariable("import_id") Long import_id) {
+    List<ImportDetailEntity> list = importDetailService.listImportDetail(import_id);
+    if (list.isEmpty()) {
+      return ResponseHandler.generateResponse("Get import_detail successfully", HttpStatus.OK, null);
+    }
+    return ResponseHandler.generateResponse("Get import_detail successfully", HttpStatus.OK, list);
+  }
+
   @GetMapping(value = "/{import_id}/{product_id}")
   public ResponseEntity<?> findImportDetail(@PathVariable("import_id") Long import_id, @PathVariable("product_id") Long product_id) {
     ImportDetailKey importDetailKey = new ImportDetailKey();

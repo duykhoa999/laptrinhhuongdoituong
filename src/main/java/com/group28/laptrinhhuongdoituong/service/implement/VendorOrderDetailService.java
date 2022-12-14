@@ -62,5 +62,11 @@ public class VendorOrderDetailService implements IVendorOrderDetailService {
   public VendorOrderDetailEntity update(VendorOrderDetailDTO vendorOrderDetailDTO) {
     return vendorOrderDetailRepository.save(vendorOrderDetailConverter.toEntity(vendorOrderDetailDTO));
   }
+
+  @Override
+  public List<VendorOrderDetailEntity> listVendorOrderDetail(Long vendorOrderId) {
+    List<VendorOrderDetailEntity> list = vendorOrderDetailRepository.findAll();
+    return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getId().getVendorOrderId().equals(vendorOrderId)).collect(Collectors.toList());
+  }
   
 }

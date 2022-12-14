@@ -68,6 +68,15 @@ public class OrderDetailController {
     return ResponseHandler.generateResponse("add order_detail successfully", HttpStatus.OK, entity);
   }
 
+  @GetMapping(value = "/{order_id}")
+  public ResponseEntity<?> findImportDetailByImportId(@PathVariable("order_id") Long order_id) {
+    List<OrderDetailEntity> list = orderDetailService.listImportDetail(order_id);
+    if (list.isEmpty()) {
+      return ResponseHandler.generateResponse("Get order_detail successfully", HttpStatus.OK, null);
+    }
+    return ResponseHandler.generateResponse("Get order_detail successfully", HttpStatus.OK, list);
+  }
+
   @DeleteMapping(value = "/{order_id}/{product_id}")
   public ResponseEntity<?> deleteOrderDetail(@PathVariable("order_id") Long order_id, @PathVariable("product_id") Long product_id) {
     OrderDetailKey orderDetailKey = new OrderDetailKey();
