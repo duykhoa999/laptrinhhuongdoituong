@@ -68,6 +68,15 @@ public class OrderController {
         return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, listOrder);
     }
 
+    @GetMapping(value = "/byuser/{id}")
+    public ResponseEntity<?> findOrderByUser(@PathVariable("id") Long id) {
+        List<OrderEntity> listOrder = orderService.listOrderByUser(id);
+        if (listOrder.isEmpty()) {
+            return ResponseHandler.generateResponse("list order is empty", HttpStatus.OK, new ArrayList<>());
+        }
+        return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, listOrder);
+    }
+
     @PostMapping
     public ResponseEntity<?> saveImport(@Valid @RequestBody OrderDTO orderDTO) {
         OrderEntity entity = orderService.save(orderDTO);

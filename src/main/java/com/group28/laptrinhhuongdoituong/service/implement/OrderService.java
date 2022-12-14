@@ -71,4 +71,10 @@ public class OrderService implements IOrderService {
     public Integer updateStatus(Long id, Long status) {
         return orderRepository.updateStatus(id, status);
     }
+
+    @Override
+    public List<OrderEntity> listOrderByUser(Long Id) {
+        List<OrderEntity> list = orderRepository.findAll();
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getUser().getId().equals(Id)).collect(Collectors.toList());
+    }
 }

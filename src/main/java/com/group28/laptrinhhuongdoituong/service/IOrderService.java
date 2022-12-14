@@ -13,6 +13,7 @@ public interface IOrderService {
     void delete(OrderDTO orderDTO);
     OrderEntity findOrderById(Long id);
     List<OrderEntity> listOrderByStatus(Integer Id);
+    List<OrderEntity> listOrderByUser(Long Id);
     List<OrderEntity> listOrderBetweenDate(Date fromDate, Date toDate);
     Integer updateStatus(Long id, Long status);
 }
