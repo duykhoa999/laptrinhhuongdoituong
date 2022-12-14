@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,8 @@ public class UserController {
   @Autowired
   private UserConverter userConverter;
 
+  @Autowired
+  PasswordEncoder encoder;
 
   @GetMapping
   public ResponseEntity<Object> listAllUser(@RequestBody Keyword keyword) {
@@ -61,6 +64,12 @@ public class UserController {
 
   @PostMapping
   public ResponseEntity<?> saveUser(@Valid @RequestBody UserDTO userDTO) {
+    UserEntity userEntityByEmail = userService.findUserByEmail(userDTO.getEmail());
+    if (userEntityByEmail != null) {
+      return ResponseHandler.generateResponse("Email is already exists", HttpStatus.OK, null);
+    }
+    String password = encoder.encode(userDTO.getPassword());
+    userDTO.setPassword(password);
     UserEntity userEntity = userService.save(userDTO);
     return ResponseHandler.generateResponse("add user successfully", HttpStatus.OK, userEntity);
   }
@@ -85,4 +94,5 @@ public class UserController {
     UserEntity user = userService.save(userDTO);
     return ResponseHandler.generateResponse("update user successfully", HttpStatus.OK, user);
   }
+  
 }
