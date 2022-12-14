@@ -57,6 +57,15 @@ public class OrderController {
         return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, orderEntity);
     }
 
+    @GetMapping(value = "/bystatus/{id}")
+    public ResponseEntity<?> findOrderByStatus(@PathVariable("id") Integer id) {
+        List<OrderEntity> listOrder = orderService.listOrderByStatus(id);
+        if (listOrder.isEmpty()) {
+            return ResponseHandler.generateResponse("Order not found", HttpStatus.OK, new ArrayList<>());
+        }
+        return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, listOrder);
+    }
+
     @PostMapping
     public ResponseEntity<?> saveImport(@Valid @RequestBody OrderDTO orderDTO) {
         OrderEntity entity = orderService.save(orderDTO);

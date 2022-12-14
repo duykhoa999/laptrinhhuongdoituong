@@ -53,4 +53,10 @@ public class OrderService implements IOrderService {
         List<OrderEntity> list = orderRepository.search(keyWord);
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
+
+    @Override
+    public List<OrderEntity> listOrderByStatus(Integer Id) {
+        List<OrderEntity> list = orderRepository.findAll();
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getStatus().equals(Id)).collect(Collectors.toList());
+    }
 }

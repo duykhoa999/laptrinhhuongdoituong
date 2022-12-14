@@ -58,4 +58,10 @@ public class ProductService implements IProductService {
         List<ProductEntity> list = productRepository.search(keyWord);
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
+
+    @Override
+    public List<ProductEntity> listProductByCategory(Long categoryId) {
+        List<ProductEntity> list = productRepository.findAll();
+        return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).filter(item -> item.getCategory().getId().equals(categoryId)).collect(Collectors.toList());
+    }
 }

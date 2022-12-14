@@ -50,6 +50,15 @@ public class ProductController {
         return ResponseHandler.generateResponse("Get Product successfully", HttpStatus.OK, entity);
     }
 
+    @GetMapping(value = "/bycategory/{id}")
+    public ResponseEntity<?> findProductByCategoryId(@PathVariable("id") Long id) {
+        List<ProductEntity> listProduct = productService.listProductByCategory(id);
+        if (listProduct.isEmpty()) {
+            return ResponseHandler.generateResponse("list product is empty", HttpStatus.OK, new ArrayList<>());
+        }
+        return ResponseHandler.generateResponse("Get product successfully", HttpStatus.OK, listProduct);
+    }
+
     @PostMapping
     public ResponseEntity<?> saveProduct(@Valid @RequestBody ProductDTO productDTO) {
         ProductEntity productEntity = productService.save(productDTO);

@@ -12,4 +12,5 @@ public interface IProductService {
     void delete(ProductDTO productDTO);
     ProductEntity findProductById(Long id);
     ProductEntity update(ProductDTO productDTO);
+    List<ProductEntity> listProductByCategory(Long categoryId);
 }
