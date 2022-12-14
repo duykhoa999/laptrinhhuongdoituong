@@ -39,13 +39,14 @@ public class BillEntity implements Serializable {
     private Double total;
     private Boolean deleted = Boolean.FALSE;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "order_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private OrderEntity order;
 
-    @JsonIgnore
+ 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
