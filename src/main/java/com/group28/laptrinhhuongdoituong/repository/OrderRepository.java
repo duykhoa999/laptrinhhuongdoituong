@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,5 +16,9 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
   @Query(value = "SELECT * FROM orders o WHERE o.date BETWEEN :startDate AND :endDate + INTERVAL 1 DAY", nativeQuery=true)
   public List<OrderEntity> getOrderBetweenDate(@Param("startDate")Date fromDate, @Param("endDate")Date toDate);
+
+  @Modifying(clearAutomatically = true)
+  @Query(value = "UPDATE orders o SET o.status = :status WHERE o.id = :id", nativeQuery=true)
+  public Integer updateStatus(@Param("id")Long id, @Param("status")Long status);
 
 }

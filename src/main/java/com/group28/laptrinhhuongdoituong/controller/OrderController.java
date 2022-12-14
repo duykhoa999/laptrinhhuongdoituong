@@ -5,6 +5,7 @@ import com.group28.laptrinhhuongdoituong.dto.Keyword;
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
 import com.group28.laptrinhhuongdoituong.message.OrderDateRequest;
+import com.group28.laptrinhhuongdoituong.message.UpdateStatusRequest;
 import com.group28.laptrinhhuongdoituong.response.ResponseHandler;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderService;
 
@@ -101,5 +102,11 @@ public class OrderController {
         orderDTO.setId(id);
         OrderEntity orderEntity = orderService.save(orderConverter.toDTO(entity));
         return ResponseHandler.generateResponse("Update Order successfully", HttpStatus.OK, orderEntity);
+    }
+
+    @PutMapping(value = "/updatestatus/{id}")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable("id") Long id, @Valid @RequestBody UpdateStatusRequest updateStatusRequest) {
+        Integer entity = orderService.updateStatus(id, updateStatusRequest.getStatus());
+        return ResponseHandler.generateResponse("Update Order successfully", HttpStatus.OK, entity);
     }
 }

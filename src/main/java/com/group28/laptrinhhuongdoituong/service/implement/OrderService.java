@@ -66,4 +66,9 @@ public class OrderService implements IOrderService {
         List<OrderEntity> list = orderRepository.getOrderBetweenDate(fromDate, toDate);
         return list.stream().filter(item -> BooleanUtils.isFalse(item.getDeleted())).collect(Collectors.toList());
     }
+
+    @Override
+    public Integer updateStatus(Long id, Long status) {
+        return orderRepository.updateStatus(id, status);
+    }
 }

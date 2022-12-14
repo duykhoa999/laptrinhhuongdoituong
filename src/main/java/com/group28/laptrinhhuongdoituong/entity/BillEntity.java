@@ -1,6 +1,8 @@
 package com.group28.laptrinhhuongdoituong.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,6 +45,7 @@ public class BillEntity implements Serializable {
     @ToString.Exclude
     private OrderEntity order;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude

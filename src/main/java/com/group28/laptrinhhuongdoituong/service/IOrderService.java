@@ -14,4 +14,5 @@ public interface IOrderService {
     OrderEntity findOrderById(Long id);
     List<OrderEntity> listOrderByStatus(Integer Id);
     List<OrderEntity> listOrderBetweenDate(Date fromDate, Date toDate);
+    Integer updateStatus(Long id, Long status);
 }
