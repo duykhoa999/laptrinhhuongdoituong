@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.group28.laptrinhhuongdoituong.dto.VendorOrderDetailDTO;
 import com.group28.laptrinhhuongdoituong.entity.VendorOrderDetailEntity;
+import com.group28.laptrinhhuongdoituong.entity.VendorOrderDetailKey;
 import com.group28.laptrinhhuongdoituong.service.implement.ProductService;
 import com.group28.laptrinhhuongdoituong.service.implement.VendorOrderService;
 
@@ -30,6 +31,10 @@ public class VendorOrderDetailConverter {
 
   public VendorOrderDetailEntity toEntity(VendorOrderDetailDTO vendorOrderDetailDTO) {
     VendorOrderDetailEntity vendorOrderDetailEntity = new VendorOrderDetailEntity();
+    VendorOrderDetailKey key = new VendorOrderDetailKey();
+    key.setVendorOrderId(vendorOrderDetailDTO.getVendor_order_id());
+    key.setProductId(vendorOrderDetailDTO.getProduct_id());
+    vendorOrderDetailEntity.setId(key);
     vendorOrderDetailEntity.setVendor_order_id(vendorOrderService.findVendorOrderById(vendorOrderDetailDTO.getVendor_order_id()));
     vendorOrderDetailEntity.setProduct_id(productService.findProductById(vendorOrderDetailDTO.getProduct_id()));
     vendorOrderDetailEntity.setAmount(vendorOrderDetailDTO.getAmount());

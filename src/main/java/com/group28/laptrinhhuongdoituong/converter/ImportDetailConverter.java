@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.group28.laptrinhhuongdoituong.dto.ImportDetailDTO;
 import com.group28.laptrinhhuongdoituong.entity.ImportDetailEntity;
+import com.group28.laptrinhhuongdoituong.entity.ImportDetailKey;
 import com.group28.laptrinhhuongdoituong.service.implement.ImportService;
 import com.group28.laptrinhhuongdoituong.service.implement.ProductService;
 
@@ -30,6 +31,9 @@ public class ImportDetailConverter {
 
   public ImportDetailEntity toEntity(ImportDetailDTO importDetailDTO) {
     ImportDetailEntity importDetailEntity = new ImportDetailEntity();
+    ImportDetailKey key = new ImportDetailKey();
+    key.setImportId(importDetailDTO.getImport_id());
+    key.setProductId(importDetailDTO.getProduct_id());
     importDetailEntity.setImport_id(importService.findImportById(importDetailDTO.getImport_id()));
     importDetailEntity.setProduct_id(productService.findProductById(importDetailDTO.getProduct_id()));
     importDetailEntity.setAmount(importDetailDTO.getAmount());

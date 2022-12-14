@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.group28.laptrinhhuongdoituong.dto.OrderDetailDTO;
 import com.group28.laptrinhhuongdoituong.entity.OrderDetailEntity;
+import com.group28.laptrinhhuongdoituong.entity.OrderDetailKey;
 import com.group28.laptrinhhuongdoituong.service.implement.OrderService;
 import com.group28.laptrinhhuongdoituong.service.implement.ProductService;
 
@@ -30,6 +31,10 @@ public class OrderDetailConverter {
 
   public OrderDetailEntity toEntity(OrderDetailDTO orderDetailDTO) {
     OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+    OrderDetailKey key = new OrderDetailKey();
+    key.setOrderId(orderDetailDTO.getOrder_id());
+    key.setProductId(orderDetailDTO.getProduct_id());
+    orderDetailEntity.setId(key);
     orderDetailEntity.setOrder_id(orderService.findOrderById(orderDetailDTO.getOrder_id()));
     orderDetailEntity.setProduct_id(productService.findProductById(orderDetailDTO.getProduct_id()));
     orderDetailEntity.setAmount(orderDetailDTO.getAmount());
