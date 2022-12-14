@@ -49,7 +49,7 @@ public class OrderConverter {
         orderEntity.setPayments(orderDTO.getPayments());
         orderEntity.setCreated_by(orderDTO.getCreated_by());
         orderEntity.setUser(userService.findUserById(orderDTO.getUser_id()));
-        orderEntity.setBill(billService.findBillById(orderDTO.getBill_id()));
+        orderEntity.setBill(orderDTO.getBill_id() != null ? billService.findBillById(orderDTO.getBill_id()) : null);
         orderEntity.setDeleted(orderDTO.getDeleted());
 
         return orderEntity;
