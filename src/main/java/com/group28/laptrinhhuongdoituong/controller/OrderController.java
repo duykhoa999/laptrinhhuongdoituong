@@ -61,7 +61,7 @@ public class OrderController {
     public ResponseEntity<?> findOrderByStatus(@PathVariable("id") Integer id) {
         List<OrderEntity> listOrder = orderService.listOrderByStatus(id);
         if (listOrder.isEmpty()) {
-            return ResponseHandler.generateResponse("Order not found", HttpStatus.OK, new ArrayList<>());
+            return ResponseHandler.generateResponse("list order is empty", HttpStatus.OK, new ArrayList<>());
         }
         return ResponseHandler.generateResponse("Get order successfully", HttpStatus.OK, listOrder);
     }
