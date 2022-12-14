@@ -22,5 +22,6 @@ public class OrderDTO {
     private Integer payments;
     private Integer created_by;
     private Long user_id;
+    private Long bill_id;
     private Boolean deleted = Boolean.FALSE;
 }

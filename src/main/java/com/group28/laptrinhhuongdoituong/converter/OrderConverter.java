@@ -2,6 +2,7 @@ package com.group28.laptrinhhuongdoituong.converter;
 
 import com.group28.laptrinhhuongdoituong.dto.OrderDTO;
 import com.group28.laptrinhhuongdoituong.entity.OrderEntity;
+import com.group28.laptrinhhuongdoituong.service.implement.BillService;
 import com.group28.laptrinhhuongdoituong.service.implement.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ public class OrderConverter {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BillService billService;
     
     public OrderDTO toDTO(OrderEntity orderEntity) {
         OrderDTO orderDTO = new OrderDTO();
@@ -26,6 +30,7 @@ public class OrderConverter {
         orderDTO.setPayments(orderEntity.getPayments());
         orderDTO.setCreated_by(orderEntity.getCreated_by());
         orderDTO.setUser_id(orderEntity.getUser().getId());
+        orderDTO.setBill_id(orderEntity.getBill().getId());
         orderDTO.setDeleted(orderEntity.getDeleted());
 
         return orderDTO;
@@ -44,6 +49,7 @@ public class OrderConverter {
         orderEntity.setPayments(orderDTO.getPayments());
         orderEntity.setCreated_by(orderDTO.getCreated_by());
         orderEntity.setUser(userService.findUserById(orderDTO.getUser_id()));
+        orderEntity.setBill(billService.findBillById(orderDTO.getBill_id()));
         orderEntity.setDeleted(orderDTO.getDeleted());
 
         return orderEntity;

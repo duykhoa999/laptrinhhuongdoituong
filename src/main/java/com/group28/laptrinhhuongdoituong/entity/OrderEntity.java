@@ -48,4 +48,7 @@ public class OrderEntity implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private UserEntity user;
+
+    @OneToOne(mappedBy = "user")
+    private BillEntity bill;
 }
